@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mr. Hasan Murad — Scholar & Digital Strategist</title>
+  <meta name="description" content="Specialized Islamic Scholar (Dawra-e-Hadith) & Founder of Setupline Agency. Building with Amanah and Sidq." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: {
+              blue:  '#00d4ff',
+              glow:  '#0096c7',
+              dim:   '#003d52',
+            },
+            glass: {
+              DEFAULT: 'rgba(255,255,255,0.04)',
+              border:  'rgba(0,212,255,0.15)',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'float':       'float 6s ease-in-out infinite',
+            'pulse-neon':  'pulseNeon 2s ease-in-out infinite',
+            'gradient':    'gradient 8s ease infinite',
+            'fade-up':     'fadeUp 0.7s ease forwards',
+            'spin-slow':   'spin 20s linear infinite',
+          },
+          keyframes: {
+            float:      { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+            pulseNeon:  { '0%,100%': { boxShadow: '0 0 8px #00d4ff55, 0 0 24px #00d4ff22' }, '50%': { boxShadow: '0 0 20px #00d4ffaa, 0 0 48px #00d4ff55' } },
+            gradient:   { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+            fadeUp:     { from: { opacity: '0', transform: 'translateY(28px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+          },
+          backgroundSize: {
+            '200': '200% 200%',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── global ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    ::selection { background: #00d4ff33; color: #00d4ff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #050d12; }
+    ::-webkit-scrollbar-thumb { background: #00d4ff55; border-radius: 4px; }
+
+    body {
+      background: #050d12;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── ambient background ── */
+    .bg-ambient {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 20%, #00d4ff0d 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, #0096c70a 0%, transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, #000810 0%, #050d12 100%);
+    }
+
+    /* ── grid noise texture ── */
+    .noise::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* ── glass card ── */
+    .glass {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(0,212,255,0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .glass-hover {
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .glass-hover:hover {
+      border-color: rgba(0,212,255,0.45);
+      box-shadow: 0 0 28px rgba(0,212,255,0.12), inset 0 0 20px rgba(0,212,255,0.04);
+      transform: translateY(-3px);
+    }
+
+    /* ── neon text ── */
+    .neon-text {
+      color: #00d4ff;
+      text-shadow: 0 0 12px #00d4ff88;
+    }
+    .neon-border {
+      border-color: #00d4ff;
+      box-shadow: 0 0 12px #00d4ff44, inset 0 0 12px #00d4ff08;
+    }
+
+    /* ── gradient headline ── */
+    .grad-text {
+      background: linear-gradient(135deg, #fff 0%, #00d4ff 50%, #0096c7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── stat counter ── */
+    .stat-val { font-variant-numeric: tabular-nums; }
+
+    /* ── progress bar ── */
+    .bar-fill {
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #0096c7);
+      border-radius: 4px;
+      box-shadow: 0 0 8px #00d4ff88;
+      transform-origin: left;
+      animation: barGrow 1.6s ease forwards;
+    }
+    @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* ── grid lines overlay ── */
+    .grid-lines {
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── tag chip ── */
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.22);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #00d4ff;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── nav link ── */
+    .nav-link {
+      position: relative;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: #00d4ff;
+      box-shadow: 0 0 6px #00d4ff;
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-link:hover { color: #00d4ff; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ── CTA button ── */
+    .btn-neon {
+      position: relative;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #00d4ff22, #0096c722);
+      border: 1px solid #00d4ff55;
+      color: #00d4ff;
+      cursor: pointer;
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+    .btn-neon::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #00d4ff, #0096c7);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-neon:hover {
+      border-color: #00d4ff;
+      box-shadow: 0 0 24px #00d4ff55;
+      color: #050d12;
+    }
+    .btn-neon:hover::before { opacity: 1; }
+    .btn-neon span { position: relative; z-index: 1; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      background: transparent;
+      border: 1px solid rgba(148,163,184,0.3);
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(0,212,255,0.5);
+      color: #00d4ff;
+    }
+
+    /* ── section fade-in ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── quote arabic ── */
+    .arabic { font-size: 1.4rem; line-height: 2; direction: rtl; }
+
+    /* ── hexagon icon ── */
+    .hex-wrap {
+      width: 56px; height: 56px;
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      background: linear-gradient(135deg, #00d4ff33, #0096c733);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── timeline ── */
+    .timeline-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #00d4ff;
+      box-shadow: 0 0 12px #00d4ff, 0 0 24px #00d4ff55;
+      flex-shrink: 0;
+    }
+    .timeline-line {
+      width: 1px;
+      background: linear-gradient(to bottom, #00d4ff55, transparent);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body class="relative">
+  <!-- Ambient background -->
+  <div class="bg-ambient"></div>
+  <div class="fixed inset-0 z-0 grid-lines pointer-events-none"></div>
+
+  <!-- ════════════════ NAV ════════════════ -->
+  <nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 glass border-b border-[rgba(0,212,255,0.1)]">
+    <a href="#hero" class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#0096c7] flex items-center justify-center text-[#050d12] font-black text-sm">HM</div>
+      <span class="font-bold text-white text-sm tracking-wide">Mr. Hasan Murad</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#identity" class="nav-link">Identity</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#values"   class="nav-link">Values</a>
+      <a href="#stats"    class="nav-link">Stats</a>
+      <a href="#contact"  class="nav-link">Contact</a>
+    </div>
+    <a href="#contact" class="btn-neon text-xs py-2 px-5">
+      <span>&#9993; Hire Me</span>
+    </a>
+  </nav>
+
+  <!-- ════════════════ HERO ════════════════ -->
+  <section id="hero" class="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16">
+    <!-- Orbital ring -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="w-[500px] h-[500px] rounded-full border border-[rgba(0,212,255,0.07)] animate-spin-slow"></div>
+      <div class="absolute w-[360px] h-[360px] rounded-full border border-[rgba(0,212,255,0.05)]" style="animation: spin 30s linear infinite reverse;"></div>
+    </div>
+
+    <!-- Avatar -->
+    <div class="relative mb-8 animate-float">
+      <div class="w-36 h-36 rounded-full p-[2px] bg-gradient-to-br from-[#00d4ff] to-[#003d52] shadow-[0_0_40px_rgba(0,212,255,0.4)]">
+        <div class="w-full h-full rounded-full glass flex items-center justify-center text-5xl font-black grad-text">HM</div>
+      </div>
+      <!-- Status badge -->
+      <div class="absolute -bottom-1 -right-1 flex items-center gap-1.5 glass px-3 py-1 rounded-full text-xs font-medium text-[#00d4ff] border border-[rgba(0,212,255,0.3)]">
+        <span class="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse"></span>Available
+      </div>
+    </div>
+
+    <!-- Eyebrow -->
+    <div class="chip mb-5">&#9670; Islamic Scholar &amp; Digital Founder</div>
+
+    <!-- Headline -->
+    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-4 leading-tight">
+      <span class="grad-text">Hasan Murad</span><br />
+      <span class="text-slate-300 text-3xl sm:text-4xl md:text-5xl font-light">Where <em class="not-italic neon-text">Deen</em> Meets <em class="not-italic neon-text">Design</em></span>
+    </h1>
+
+    <!-- Sub -->
+    <p class="max-w-xl text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-light">
+      Specialized Islamic Scholar &amp; Founder of <span class="text-[#00d4ff] font-semibold">Setupline Agency</span> — delivering digital excellence rooted in Islamic ethics.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap gap-4 justify-center mb-14">
+      <a href="#contact" class="btn-neon"><span>&#10024; Start a Project</span></a>
+      <a href="#about"   class="btn-ghost">Learn More &#8594;</a>
+    </div>
+
+    <!-- Mini stat strip -->
+    <div class="flex flex-wrap gap-6 justify-center">
+      <div class="text-center">
+        <div class="text-2xl font-black neon-text">150+</div>
+        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">PROJECTS</div>
+      </div>
+      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-2xl font-black neon-text">98%</div>
+        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">SATISFACTION</div>
+      </div>
+      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-2xl font-black neon-text">5+</div>
+        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">YEARS XP</div>
+      </div>
+      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
+      <div class="text-center">
+        <div class="text-2xl font-black neon-text">2</div>
+        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">DISCIPLINES</div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
+      <span class="text-[10px] text-slate-600 tracking-widest">SCROLL</span>
+      <svg class="w-4 h-4 text-[#00d4ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ════════════════ ABOUT ════════════════ -->
+  <section id="about" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#128100; About Me</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Two Worlds, One Purpose</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">I live at the intersection of sacred knowledge and modern technology — each discipline strengthening the other.</p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- Bio card — wide -->
+      <div class="md:col-span-2 glass glass-hover rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
+        <div class="chip mb-5">&#128218; Scholar &amp; Strategist</div>
+        <p class="text-slate-300 leading-relaxed mb-4">
+          Alhamdulillah — I completed <strong class="text-white">Dawra-e-Hadith</strong>, the most advanced level of classical Islamic studies, which deepened my understanding of ethics, jurisprudence, and human behaviour. This foundation doesn't just guide my personal life; it governs every business decision I make.
+        </p>
+        <p class="text-slate-400 leading-relaxed text-sm">
+          Alongside this, I founded <strong class="text-[#00d4ff]">Setupline Agency</strong> — a full-service digital studio helping brands and entrepreneurs build impactful online presences. Integrity is not a tagline for me; it is a religious obligation.
+        </p>
+      </div>
+
+      <!-- Quick info card -->
+      <div class="glass glass-hover rounded-2xl p-6 flex flex-col gap-4">
+        <div class="chip">&#9881; Quick Info</div>
+        <ul class="space-y-3 mt-1">
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
+            <div>
+              <div class="text-xs text-slate-500 font-medium tracking-wider">EDUCATION</div>
+              <div class="text-sm text-white font-semibold mt-0.5">Dawra-e-Hadith</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
+            <div>
+              <div class="text-xs text-slate-500 font-medium tracking-wider">BUSINESS</div>
+              <div class="text-sm text-white font-semibold mt-0.5">Setupline Agency</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
+            <div>
+              <div class="text-xs text-slate-500 font-medium tracking-wider">LOCATION</div>
+              <div class="text-sm text-white font-semibold mt-0.5">Bangladesh &#127988;</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
+            <div>
+              <div class="text-xs text-slate-500 font-medium tracking-wider">LANGUAGES</div>
+              <div class="text-sm text-white font-semibold mt-0.5">Bengali · Arabic · English</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
+            <div>
+              <div class="text-xs text-slate-500 font-medium tracking-wider">WEBSITE</div>
+              <div class="text-sm text-[#00d4ff] font-semibold mt-0.5">mrhasanmurad.com</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Arabic quote card -->
+      <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.06),transparent_70%)]"></div>
+        <div class="arabic text-[#00d4ff] mb-3 relative">إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ</div>
+        <p class="text-slate-400 text-xs leading-relaxed relative">
+          "Indeed, Allah loves that when one of you does a job, he does it with <em class="text-[#00d4ff] not-italic">Itqan</em> (excellence)."<br />
+          <span class="text-slate-600 mt-1 block">— Prophet Muhammad ﷺ</span>
+        </p>
+      </div>
+
+      <!-- Journey timeline — wide -->
+      <div class="md:col-span-2 glass glass-hover rounded-2xl p-8">
+        <div class="chip mb-6">&#128336; My Journey</div>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-1"></div>
+            </div>
+            <div class="pb-4">
+              <div class="text-xs text-[#00d4ff] font-mono mb-1">2019 — Present</div>
+              <div class="text-white font-bold">Founder — Setupline Agency</div>
+              <div class="text-slate-400 text-sm mt-1">Built a digital agency delivering web design, branding, and growth strategy to 150+ clients globally.</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-1"></div>
+            </div>
+            <div class="pb-4">
+              <div class="text-xs text-[#00d4ff] font-mono mb-1">2021 — 2024</div>
+              <div class="text-white font-bold">Dawra-e-Hadith — Advanced Islamic Studies</div>
+              <div class="text-slate-400 text-sm mt-1">Completed the highest level of Hadith sciences, studying the Six Books under certified scholars.</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+            </div>
+            <div>
+              <div class="text-xs text-[#00d4ff] font-mono mb-1">2018</div>
+              <div class="text-white font-bold">First Digital Project</div>
+              <div class="text-slate-400 text-sm mt-1">Launched first client website — the spark that ignited a passion for purposeful digital work.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ DUAL IDENTITY ════════════════ -->
+  <section id="identity" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#9889; Dual Identity</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Scholar &amp; Founder</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Two paths. One man. Fully committed to excellence in both.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Islamic Scholar card -->
+      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <!-- Icon -->
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00d4ff22] to-[#0096c722] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-2xl mb-6">&#9728;&#65039;</div>
+        <div class="chip mb-4">&#127381; Religious Authority</div>
+        <h3 class="text-2xl font-black text-white mb-3">Specialized Islamic Scholar</h3>
+        <p class="text-slate-400 leading-relaxed mb-5 text-sm">
+          Holder of <strong class="text-white">Dawra-e-Hadith</strong> — the pinnacle of traditional Islamic education. My studies encompass Hadith sciences, Fiqh (Islamic jurisprudence), Tafsir, and Islamic ethics under certified chain of narration back to the Prophet ﷺ.
+        </p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Six Books of Hadith (Kutub al-Sittah)</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Islamic Jurisprudence &amp; Fatwa</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Quranic Exegesis (Tafsir)</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Ethics in Business &amp; Trade</div>
+        </div>
+      </div>
+
+      <!-- Agency Founder card -->
+      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00d4ff22] to-[#0096c722] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-2xl mb-6">&#128640;</div>
+        <div class="chip mb-4">&#128200; Digital Business</div>
+        <h3 class="text-2xl font-black text-white mb-3">Founder — Setupline Agency</h3>
+        <p class="text-slate-400 leading-relaxed mb-5 text-sm">
+          Setupline is a full-service digital agency where every project is handled with the same meticulous care demanded by Islamic standards of <em class="not-italic text-[#00d4ff]">Itqan</em> (excellence). We build brands, websites, and strategies that convert — with integrity at the core.
+        </p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Web Design &amp; Development</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Brand Identity &amp; Strategy</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> SEO &amp; Digital Marketing</div>
+          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Business Consultation</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ SERVICES ════════════════ -->
+  <section id="services" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#128188; Services</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">What I Build For You</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Every service is delivered with professionalism, speed, and ethical transparency.</p>
+    </div>
+
+    <!-- Bento service grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Service 1 -->
+      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)] group-hover:opacity-150 transition-opacity"></div>
+        <div class="text-3xl mb-4">&#127760;</div>
+        <h3 class="text-lg font-bold text-white mb-2">Web Design &amp; Dev</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Stunning, fast, and conversion-optimised websites built to reflect your brand identity.</p>
+        <div class="mt-4 flex flex-wrap gap-1">
+          <span class="chip text-[10px]">HTML5</span>
+          <span class="chip text-[10px]">Tailwind</span>
+          <span class="chip text-[10px]">WordPress</span>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
+        <div class="text-3xl mb-4">&#128161;</div>
+        <h3 class="text-lg font-bold text-white mb-2">Brand Identity</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Logo design, colour palettes, and brand guidelines that communicate trust at a glance.</p>
+        <div class="mt-4 flex flex-wrap gap-1">
+          <span class="chip text-[10px]">Logo</span>
+          <span class="chip text-[10px]">Guidelines</span>
+          <span class="chip text-[10px]">Assets</span>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
+        <div class="text-3xl mb-4">&#128269;</div>
+        <h3 class="text-lg font-bold text-white mb-2">SEO &amp; Growth</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Organic search strategies that put your business in front of the right audience consistently.</p>
+        <div class="mt-4 flex flex-wrap gap-1">
+          <span class="chip text-[10px]">On-Page</span>
+          <span class="chip text-[10px]">Technical</span>
+          <span class="chip text-[10px]">Content</span>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
+        <div class="text-3xl mb-4">&#128293;</div>
+        <h3 class="text-lg font-bold text-white mb-2">Social Media</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Compelling content strategies that grow engaged audiences and drive real business results.</p>
+        <div class="mt-4 flex flex-wrap gap-1">
+          <span class="chip text-[10px]">Strategy</span>
+          <span class="chip text-[10px]">Content</span>
+          <span class="chip text-[10px]">Analytics</span>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
+        <div class="text-3xl mb-4">&#128172;</div>
+        <h3 class="text-lg font-bold text-white mb-2">Business Consulting</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Strategic guidance rooted in Islamic business ethics — Halal growth, honest counsel.</p>
+        <div class="mt-4 flex flex-wrap gap-1">
+          <span class="chip text-[10px]">Strategy</span>
+          <span class="chip text-[10px]">Ethics</span>
+          <span class="chip text-[10px]">Growth</span>
+        </div>
+      </div>
+
+      <!-- Service 6 — CTA tile -->
+      <div class="glass rounded-2xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden border border-[rgba(0,212,255,0.25)] animate-pulse-neon">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.06)] to-transparent"></div>
+        <div class="text-3xl mb-3 relative">&#9997;&#65039;</div>
+        <h3 class="text-lg font-bold text-white mb-2 relative">Custom Project?</h3>
+        <p class="text-slate-400 text-sm mb-4 relative">Let's discuss your unique needs and build something extraordinary together.</p>
+        <a href="#contact" class="btn-neon text-xs py-2 px-5 relative"><span>Let's Talk</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ VALUES ════════════════ -->
+  <section id="values" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#10024; Core Values</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Built on Islamic Ethics</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">These aren't marketing words. They are commandments I answer to before Allah.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+
+      <!-- Amanah -->
+      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.04)] to-transparent"></div>
+        <div class="relative">
+          <!-- Arabic + English -->
+          <div class="flex items-start gap-5 mb-5">
+            <div class="text-4xl font-black neon-text">أ</div>
+            <div>
+              <div class="text-xl font-black text-white">Amanah — Trust</div>
+              <div class="text-[#00d4ff] text-sm font-medium">أَمَانَة</div>
+            </div>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-sm mb-5">
+            <strong class="text-white">Amanah</strong> means I treat your project as a sacred responsibility. Your data, your money, your vision — I guard them as a trustee, not merely as a contractor. In Islam, betraying a trust is among the gravest sins. I do not take that lightly.
+          </p>
+          <div class="bg-[rgba(0,212,255,0.06)] border-l-2 border-[#00d4ff] pl-4 py-2 rounded-r text-xs text-slate-400 italic">
+            "The signs of the hypocrite are three: when he speaks he lies, when he promises he breaks it, and when he is entrusted he betrays." — Prophet Muhammad ﷺ
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidq -->
+      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.04)] to-transparent"></div>
+        <div class="relative">
+          <div class="flex items-start gap-5 mb-5">
+            <div class="text-4xl font-black neon-text">ص</div>
+            <div>
+              <div class="text-xl font-black text-white">Sidq — Honesty</div>
+              <div class="text-[#00d4ff] text-sm font-medium">صِدْق</div>
+            </div>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-sm mb-5">
+            <strong class="text-white">Sidq</strong> means you receive truth — not flattery. I will tell you honestly if a strategy won't work, if a timeline is unrealistic, or if a budget is insufficient. Honest advice is more valuable than a comfortable lie that wastes your resources.
+          </p>
+          <div class="bg-[rgba(0,212,255,0.06)] border-l-2 border-[#00d4ff] pl-4 py-2 rounded-r text-xs text-slate-400 italic">
+            "Hold fast to truthfulness, for indeed truthfulness leads to righteousness, and righteousness leads to Paradise." — Prophet Muhammad ﷺ
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values strip -->
+    <div class="glass rounded-2xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-2xl mb-2">&#9989;</div>
+        <div class="text-sm font-bold text-white">No Hidden Fees</div>
+        <div class="text-xs text-slate-500 mt-1">Full transparency on pricing</div>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">&#128274;</div>
+        <div class="text-sm font-bold text-white">Data Privacy</div>
+        <div class="text-xs text-slate-500 mt-1">Your info stays yours</div>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">&#128336;</div>
+        <div class="text-sm font-bold text-white">On-Time Delivery</div>
+        <div class="text-xs text-slate-500 mt-1">Commitments are kept</div>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">&#129309;</div>
+        <div class="text-sm font-bold text-white">Halal Business</div>
+        <div class="text-xs text-slate-500 mt-1">Ethically sound, always</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ STATS ════════════════ -->
+  <section id="stats" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#128202; Numbers</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Proven Track Record</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Results speak louder than promises. Here's what Amanah and Sidq deliver.</p>
+    </div>
+
+    <!-- Big stats bento -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
+        <div class="stat-val text-5xl font-black neon-text mb-2 relative">150+</div>
+        <div class="text-white font-semibold relative">Projects Delivered</div>
+        <div class="text-slate-500 text-xs mt-1 relative">Across 15+ countries</div>
+      </div>
+      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
+        <div class="stat-val text-5xl font-black neon-text mb-2 relative">98%</div>
+        <div class="text-white font-semibold relative">Satisfaction Rate</div>
+        <div class="text-slate-500 text-xs mt-1 relative">Verified client feedback</div>
+      </div>
+      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
+        <div class="stat-val text-5xl font-black neon-text mb-2 relative">5+</div>
+        <div class="text-white font-semibold relative">Years Experience</div>
+        <div class="text-slate-500 text-xs mt-1 relative">In digital services</div>
+      </div>
+      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
+        <div class="stat-val text-5xl font-black neon-text mb-2 relative">2</div>
+        <div class="text-white font-semibold relative">Fields Mastered</div>
+        <div class="text-slate-500 text-xs mt-1 relative">Deen &amp; Digital</div>
+      </div>
+    </div>
+
+    <!-- Skill bars -->
+    <div class="glass rounded-2xl p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="space-y-5">
+        <div class="chip mb-2">&#127919; Skill Mastery</div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">Islamic Scholarship</span>
+            <span class="text-[#00d4ff] font-mono">100%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">Web Design</span>
+            <span class="text-[#00d4ff] font-mono">95%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:95%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">Brand Strategy</span>
+            <span class="text-[#00d4ff] font-mono">90%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:90%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-5">
+        <div class="chip mb-2">&#128200; Business Metrics</div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">Client Satisfaction</span>
+            <span class="text-[#00d4ff] font-mono">98%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:98%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">On-Time Delivery</span>
+            <span class="text-[#00d4ff] font-mono">96%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:96%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-white font-medium">Repeat Clients</span>
+            <span class="text-[#00d4ff] font-mono">85%</span>
+          </div>
+          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+            <div class="bar-fill" style="width:85%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ TESTIMONIALS ════════════════ -->
+  <section class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#128172; Testimonials</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">What Clients Say</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="glass glass-hover rounded-2xl p-6">
+        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">"Hasan delivered beyond our expectations. His professionalism and attention to detail are unmatched. The website he built for us tripled our inquiry rate."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">AR</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Ahmed Rahman</div>
+            <div class="text-slate-500 text-xs">E-commerce Entrepreneur</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass glass-hover rounded-2xl p-6">
+        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">"His Islamic background gives him a unique perspective on ethical business. He's honest about timelines and never overpromises. Rare quality."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">SK</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Sarah Khan</div>
+            <div class="text-slate-500 text-xs">Brand Director, Dubai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass glass-hover rounded-2xl p-6">
+        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">"Setupline transformed our online presence completely. Hasan's strategic guidance helped us achieve 200% growth in organic traffic within 4 months."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">MI</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Mohammed Islam</div>
+            <div class="text-slate-500 text-xs">CEO, TechStart BD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ CONTACT ════════════════ -->
+  <section id="contact" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <div class="chip mb-4">&#128222; Get In Touch</div>
+      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Let's Build Together</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Ready to start a project built on trust and excellence? I'd love to hear from you.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
+
+      <!-- Contact info -->
+      <div class="md:col-span-2 glass rounded-2xl p-8 flex flex-col gap-6">
+        <div class="chip">&#9993; Contact Info</div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128140;</div>
+          <div>
+            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">WEBSITE</div>
+            <div class="text-white font-semibold">mrhasanmurad.com</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128203;</div>
+          <div>
+            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">AGENCY</div>
+            <div class="text-white font-semibold">Setupline Agency</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#127757;</div>
+          <div>
+            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">LOCATION</div>
+            <div class="text-white font-semibold">Bangladesh (Remote Worldwide)</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128337;</div>
+          <div>
+            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">RESPONSE TIME</div>
+            <div class="text-white font-semibold">Within 24 Hours</div>
+          </div>
+        </div>
+
+        <!-- Value reminder -->
+        <div class="mt-auto glass border-[rgba(0,212,255,0.2)] rounded-xl p-4 text-center">
+          <div class="text-xs text-slate-500 mb-1">Promise to every client</div>
+          <div class="text-[#00d4ff] font-bold">Amanah &amp; Sidq</div>
+          <div class="text-xs text-slate-500">Trust &amp; Honesty — always</div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="md:col-span-3 glass rounded-2xl p-8">
+        <div class="chip mb-6">&#9997;&#65039; Send a Message</div>
+        <form id="contactForm" class="space-y-5" onsubmit="handleForm(event)">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR NAME</label>
+              <input type="text" placeholder="John Doe" required
+                class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR EMAIL</label>
+              <input type="email" placeholder="you@example.com" required
+                class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all" />
+            </div>
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">PROJECT TYPE</label>
+            <select class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white text-sm outline-none focus:border-[#00d4ff] transition-all appearance-none cursor-pointer">
+              <option value="" class="bg-[#050d12]">Select a service...</option>
+              <option value="web" class="bg-[#050d12]">Web Design &amp; Development</option>
+              <option value="brand" class="bg-[#050d12]">Brand Identity</option>
+              <option value="seo" class="bg-[#050d12]">SEO &amp; Growth</option>
+              <option value="social" class="bg-[#050d12]">Social Media</option>
+              <option value="consult" class="bg-[#050d12]">Business Consulting</option>
+              <option value="other" class="bg-[#050d12]">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR MESSAGE</label>
+            <textarea rows="5" placeholder="Tell me about your project..." required
+              class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-neon w-full justify-center">
+            <span>Send Message &#10142;</span>
+          </button>
+          <p id="formMsg" class="text-center text-[#00d4ff] text-sm hidden">JazakAllah Khair! Your message was sent. I'll reply within 24 hours In sha Allah.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer class="relative z-10 border-t border-[rgba(0,212,255,0.08)] py-10 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#0096c7] flex items-center justify-center text-[#050d12] font-black text-sm">HM</div>
+        <div>
+          <div class="text-white font-bold text-sm">Mr. Hasan Murad</div>
+          <div class="text-slate-600 text-xs">Scholar · Founder · Strategist</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs text-slate-600">
+        <span class="text-[#00d4ff] font-semibold">أَمَانَة</span>
+        <span>·</span>
+        <span class="text-[#00d4ff] font-semibold">صِدْق</span>
+        <span>·</span>
+        <span>Amanah &amp; Sidq</span>
+      </div>
+
+      <div class="text-xs text-slate-600 text-center md:text-right">
+        &copy; <span id="year"></span> mrhasanmurad.com &bull; Built with excellence
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════ SCRIPTS ════════════════ -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form mock handler
+    function handleForm(e) {
+      e.preventDefault();
+      const msg = document.getElementById('formMsg');
+      msg.classList.remove('hidden');
+      e.target.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Mobile nav toggle (hamburger) — handled by simple class toggle
+    // (Full nav visible on md+, hidden below — add burger if needed)
+  </script>
+</body>
+</html>
