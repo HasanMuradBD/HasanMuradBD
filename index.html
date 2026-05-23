@@ -1,975 +1,773 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mr. Hasan Murad — Scholar & Digital Strategist</title>
-  <meta name="description" content="Specialized Islamic Scholar (Dawra-e-Hadith) & Founder of Setupline Agency. Building with Amanah and Sidq." />
+  <meta name="description" content="MRH Murad LLC — A Florida-based holding company driving innovation in e-commerce, digital agency services, and international corporate compliance." />
+  <title>MRH MURAD LLC | Global Holding Company</title>
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
           colors: {
-            neon: {
-              blue:  '#00d4ff',
-              glow:  '#0096c7',
-              dim:   '#003d52',
-            },
-            glass: {
-              DEFAULT: 'rgba(255,255,255,0.04)',
-              border:  'rgba(0,212,255,0.15)',
-            },
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          animation: {
-            'float':       'float 6s ease-in-out infinite',
-            'pulse-neon':  'pulseNeon 2s ease-in-out infinite',
-            'gradient':    'gradient 8s ease infinite',
-            'fade-up':     'fadeUp 0.7s ease forwards',
-            'spin-slow':   'spin 20s linear infinite',
+            gold: { DEFAULT: '#C9A84C', light: '#E8CC7A', dark: '#A07830' },
           },
           keyframes: {
-            float:      { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
-            pulseNeon:  { '0%,100%': { boxShadow: '0 0 8px #00d4ff55, 0 0 24px #00d4ff22' }, '50%': { boxShadow: '0 0 20px #00d4ffaa, 0 0 48px #00d4ff55' } },
-            gradient:   { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
-            fadeUp:     { from: { opacity: '0', transform: 'translateY(28px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+            shimmer: {
+              '0%':   { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition:  '200% 0' },
+            },
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
           },
-          backgroundSize: {
-            '200': '200% 200%',
+          animation: {
+            shimmer: 'shimmer 3s infinite linear',
+            fadeUp:  'fadeUp 0.7s ease-out forwards',
           },
         },
       },
     };
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
-    /* ── global ── */
-    *, *::before, *::after { box-sizing: border-box; }
-    ::selection { background: #00d4ff33; color: #00d4ff; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #050d12; }
-    ::-webkit-scrollbar-thumb { background: #00d4ff55; border-radius: 4px; }
+    /* ── Base ── */
+    html  { scroll-behavior: smooth; }
+    body  { font-family: 'Inter', sans-serif; background: #040810; }
 
-    body {
-      background: #050d12;
-      color: #e2e8f0;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ── ambient background ── */
-    .bg-ambient {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 70% 50% at 20% 20%, #00d4ff0d 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 80%, #0096c70a 0%, transparent 60%),
-        radial-gradient(ellipse 80% 80% at 50% 50%, #000810 0%, #050d12 100%);
-    }
-
-    /* ── grid noise texture ── */
-    .noise::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    /* ── glass card ── */
-    .glass {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(0,212,255,0.12);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    .glass-hover {
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    .glass-hover:hover {
-      border-color: rgba(0,212,255,0.45);
-      box-shadow: 0 0 28px rgba(0,212,255,0.12), inset 0 0 20px rgba(0,212,255,0.04);
-      transform: translateY(-3px);
-    }
-
-    /* ── neon text ── */
-    .neon-text {
-      color: #00d4ff;
-      text-shadow: 0 0 12px #00d4ff88;
-    }
-    .neon-border {
-      border-color: #00d4ff;
-      box-shadow: 0 0 12px #00d4ff44, inset 0 0 12px #00d4ff08;
-    }
-
-    /* ── gradient headline ── */
-    .grad-text {
-      background: linear-gradient(135deg, #fff 0%, #00d4ff 50%, #0096c7 100%);
+    /* ── Gold gradient text ── */
+    .gold-text {
+      background: linear-gradient(135deg, #C9A84C 0%, #E8CC7A 50%, #C9A84C 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* ── stat counter ── */
-    .stat-val { font-variant-numeric: tabular-nums; }
-
-    /* ── progress bar ── */
-    .bar-fill {
-      height: 3px;
-      background: linear-gradient(90deg, #00d4ff, #0096c7);
-      border-radius: 4px;
-      box-shadow: 0 0 8px #00d4ff88;
-      transform-origin: left;
-      animation: barGrow 1.6s ease forwards;
-    }
-    @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-
-    /* ── grid lines overlay ── */
-    .grid-lines {
+    /* ── Subtle grid overlay ── */
+    .grid-bg {
       background-image:
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
       background-size: 60px 60px;
     }
 
-    /* ── tag chip ── */
-    .chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 4px 12px;
-      background: rgba(0,212,255,0.08);
-      border: 1px solid rgba(0,212,255,0.22);
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: #00d4ff;
-      letter-spacing: 0.05em;
+    /* ── Section colours ── */
+    .section-alt { background: #07111f; }
+
+    /* ── Card base ── */
+    .card-base {
+      background: linear-gradient(145deg, #0d1b2a, #0a1628);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-base:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(201,168,76,0.12);
     }
 
-    /* ── nav link ── */
-    .nav-link {
-      position: relative;
-      color: #94a3b8;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: color 0.25s;
-    }
-    .nav-link::after {
+    /* ── Top-edge sweep on portfolio cards ── */
+    .portfolio-card { position: relative; overflow: hidden; }
+    .portfolio-card::before {
       content: '';
-      position: absolute; bottom: -2px; left: 0; right: 0;
-      height: 1px;
-      background: #00d4ff;
-      box-shadow: 0 0 6px #00d4ff;
+      position: absolute; inset-x: 0; top: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #C9A84C, transparent);
       transform: scaleX(0);
-      transition: transform 0.3s;
+      transition: transform 0.4s ease;
     }
-    .nav-link:hover { color: #00d4ff; }
-    .nav-link:hover::after { transform: scaleX(1); }
+    .portfolio-card:hover::before { transform: scaleX(1); }
 
-    /* ── CTA button ── */
-    .btn-neon {
-      position: relative;
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      background: linear-gradient(135deg, #00d4ff22, #0096c722);
-      border: 1px solid #00d4ff55;
-      color: #00d4ff;
-      cursor: pointer;
-      transition: all 0.3s;
-      overflow: hidden;
+    /* ── Thin gold divider ── */
+    .gold-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A84C 50%, transparent);
     }
-    .btn-neon::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, #00d4ff, #0096c7);
+
+    /* ── Backdrop blur nav ── */
+    .nav-blur {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* ── Pulse rings on globe vis ── */
+    @keyframes ring-pulse {
+      0%   { transform: scale(1);   opacity: 0.6; }
+      100% { transform: scale(2.2); opacity: 0;   }
+    }
+    .ring-pulse { animation: ring-pulse 3s ease-out infinite; }
+    .ring-pulse-delay { animation: ring-pulse 3s ease-out infinite; animation-delay: 1s; }
+
+    /* ── Scroll-reveal base state ── */
+    .reveal {
       opacity: 0;
-      transition: opacity 0.3s;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .btn-neon:hover {
-      border-color: #00d4ff;
-      box-shadow: 0 0 24px #00d4ff55;
-      color: #050d12;
-    }
-    .btn-neon:hover::before { opacity: 1; }
-    .btn-neon span { position: relative; z-index: 1; }
-
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      background: transparent;
-      border: 1px solid rgba(148,163,184,0.3);
-      color: #94a3b8;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .btn-ghost:hover {
-      border-color: rgba(0,212,255,0.5);
-      color: #00d4ff;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* ── section fade-in ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── quote arabic ── */
-    .arabic { font-size: 1.4rem; line-height: 2; direction: rtl; }
-
-    /* ── hexagon icon ── */
-    .hex-wrap {
-      width: 56px; height: 56px;
-      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-      background: linear-gradient(135deg, #00d4ff33, #0096c733);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* ── timeline ── */
-    .timeline-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: #00d4ff;
-      box-shadow: 0 0 12px #00d4ff, 0 0 24px #00d4ff55;
-      flex-shrink: 0;
-    }
-    .timeline-line {
-      width: 1px;
-      background: linear-gradient(to bottom, #00d4ff55, transparent);
-      flex-shrink: 0;
-    }
+    /* ── Tag micro-text ── */
+    .tag { font-size: 0.625rem; letter-spacing: 0.1em; }
   </style>
 </head>
 
-<body class="relative">
-  <!-- Ambient background -->
-  <div class="bg-ambient"></div>
-  <div class="fixed inset-0 z-0 grid-lines pointer-events-none"></div>
+<body class="text-gray-100 antialiased">
 
-  <!-- ════════════════ NAV ════════════════ -->
-  <nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 glass border-b border-[rgba(0,212,255,0.1)]">
-    <a href="#hero" class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#0096c7] flex items-center justify-center text-[#050d12] font-black text-sm">HM</div>
-      <span class="font-bold text-white text-sm tracking-wide">Mr. Hasan Murad</span>
-    </a>
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#about"    class="nav-link">About</a>
-      <a href="#identity" class="nav-link">Identity</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#values"   class="nav-link">Values</a>
-      <a href="#stats"    class="nav-link">Stats</a>
-      <a href="#contact"  class="nav-link">Contact</a>
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════ -->
+  <nav class="fixed top-0 inset-x-0 z-50 nav-blur bg-[#040810]/80 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded bg-gradient-to-br from-yellow-600 to-yellow-400 flex items-center justify-center flex-shrink-0">
+            <span class="text-black font-black text-sm leading-none">M</span>
+          </div>
+          <span class="font-bold text-white tracking-wider text-sm">MRH MURAD<span class="text-gold"> LLC</span></span>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#portfolio" class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors tracking-wide">Portfolio</a>
+          <a href="#values"    class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors tracking-wide">Values</a>
+          <a href="#global"    class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors tracking-wide">Global Footprint</a>
+          <a href="#contact"   class="nav-link text-gray-400 hover:text-white text-sm font-medium transition-colors tracking-wide">Contact</a>
+        </div>
+
+        <!-- Desktop CTA -->
+        <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 border border-gold/40 text-gold text-sm font-medium rounded hover:bg-gold/10 transition-all tracking-wide">
+          Get in Touch
+        </a>
+
+        <!-- Mobile burger -->
+        <button id="menuBtn" aria-label="Toggle menu" class="md:hidden p-2 text-gray-400 hover:text-white">
+          <svg id="iconOpen"  xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
     </div>
-    <a href="#contact" class="btn-neon text-xs py-2 px-5">
-      <span>&#9993; Hire Me</span>
-    </a>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#040810] border-t border-white/5 px-6 py-5 space-y-3">
+      <a href="#portfolio" class="mobile-link block text-gray-400 hover:text-white text-sm font-medium py-2 transition-colors">Portfolio</a>
+      <a href="#values"    class="mobile-link block text-gray-400 hover:text-white text-sm font-medium py-2 transition-colors">Values</a>
+      <a href="#global"    class="mobile-link block text-gray-400 hover:text-white text-sm font-medium py-2 transition-colors">Global Footprint</a>
+      <a href="#contact"   class="mobile-link block text-gray-400 hover:text-white text-sm font-medium py-2 transition-colors">Contact</a>
+      <a href="#contact"   class="mobile-link block text-center px-4 py-2.5 border border-gold/40 text-gold text-sm font-medium rounded mt-3 hover:bg-gold/10 transition-all">Get in Touch</a>
+    </div>
   </nav>
 
-  <!-- ════════════════ HERO ════════════════ -->
-  <section id="hero" class="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16">
-    <!-- Orbital ring -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div class="w-[500px] h-[500px] rounded-full border border-[rgba(0,212,255,0.07)] animate-spin-slow"></div>
-      <div class="absolute w-[360px] h-[360px] rounded-full border border-[rgba(0,212,255,0.05)]" style="animation: spin 30s linear infinite reverse;"></div>
-    </div>
 
-    <!-- Avatar -->
-    <div class="relative mb-8 animate-float">
-      <div class="w-36 h-36 rounded-full p-[2px] bg-gradient-to-br from-[#00d4ff] to-[#003d52] shadow-[0_0_40px_rgba(0,212,255,0.4)]">
-        <div class="w-full h-full rounded-full glass flex items-center justify-center text-5xl font-black grad-text">HM</div>
+  <!-- ═══════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════ -->
+  <section class="grid-bg relative min-h-screen flex flex-col items-center justify-center pt-24 pb-20 px-4 overflow-hidden"
+           style="background-color:#040810;">
+
+    <!-- Ambient blobs -->
+    <div class="absolute top-1/4 left-1/4 w-[480px] h-[480px] rounded-full bg-blue-900/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[320px] h-[320px] rounded-full bg-yellow-900/8 blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-gold/20 bg-gold/5 mb-10">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse flex-shrink-0"></span>
+        <span class="text-gold text-xs font-semibold tracking-[0.2em] uppercase">Florida-Based Global Holding Company</span>
       </div>
-      <!-- Status badge -->
-      <div class="absolute -bottom-1 -right-1 flex items-center gap-1.5 glass px-3 py-1 rounded-full text-xs font-medium text-[#00d4ff] border border-[rgba(0,212,255,0.3)]">
-        <span class="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse"></span>Available
+
+      <!-- Headline -->
+      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-none mb-5">
+        <span class="text-white">MRH </span><span class="gold-text">MURAD</span><span class="text-white"> LLC</span>
+      </h1>
+
+      <!-- Thin rule -->
+      <div class="gold-divider max-w-[200px] mx-auto mb-8"></div>
+
+      <!-- Sub-headline -->
+      <p class="text-xl sm:text-2xl md:text-3xl font-light text-gray-200 tracking-wide mb-5">
+        Building and Scaling <span class="text-white font-semibold">Global Digital Infrastructure.</span>
+      </p>
+
+      <!-- Descriptor -->
+      <p class="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-12 font-light">
+        A Florida-based holding company driving innovation in e-commerce, digital agency services,
+        and international corporate compliance.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#portfolio"
+           class="px-8 py-3.5 bg-gradient-to-r from-gold to-gold-light text-black font-bold text-sm rounded tracking-widest hover:opacity-90 transition-opacity">
+          VIEW PORTFOLIO
+        </a>
+        <a href="#contact"
+           class="px-8 py-3.5 border border-white/20 text-white font-medium text-sm rounded tracking-widest hover:border-white/40 hover:bg-white/5 transition-all">
+          CONTACT US
+        </a>
       </div>
-    </div>
 
-    <!-- Eyebrow -->
-    <div class="chip mb-5">&#9670; Islamic Scholar &amp; Digital Founder</div>
-
-    <!-- Headline -->
-    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-4 leading-tight">
-      <span class="grad-text">Hasan Murad</span><br />
-      <span class="text-slate-300 text-3xl sm:text-4xl md:text-5xl font-light">Where <em class="not-italic neon-text">Deen</em> Meets <em class="not-italic neon-text">Design</em></span>
-    </h1>
-
-    <!-- Sub -->
-    <p class="max-w-xl text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-light">
-      Specialized Islamic Scholar &amp; Founder of <span class="text-[#00d4ff] font-semibold">Setupline Agency</span> — delivering digital excellence rooted in Islamic ethics.
-    </p>
-
-    <!-- CTAs -->
-    <div class="flex flex-wrap gap-4 justify-center mb-14">
-      <a href="#contact" class="btn-neon"><span>&#10024; Start a Project</span></a>
-      <a href="#about"   class="btn-ghost">Learn More &#8594;</a>
-    </div>
-
-    <!-- Mini stat strip -->
-    <div class="flex flex-wrap gap-6 justify-center">
-      <div class="text-center">
-        <div class="text-2xl font-black neon-text">150+</div>
-        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">PROJECTS</div>
-      </div>
-      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
-      <div class="text-center">
-        <div class="text-2xl font-black neon-text">98%</div>
-        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">SATISFACTION</div>
-      </div>
-      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
-      <div class="text-center">
-        <div class="text-2xl font-black neon-text">5+</div>
-        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">YEARS XP</div>
-      </div>
-      <div class="w-px bg-[rgba(0,212,255,0.2)] hidden sm:block"></div>
-      <div class="text-center">
-        <div class="text-2xl font-black neon-text">2</div>
-        <div class="text-xs text-slate-500 font-medium tracking-wider mt-1">DISCIPLINES</div>
+      <!-- Stat strip -->
+      <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+        <div class="text-center">
+          <div class="text-3xl font-black gold-text">2+</div>
+          <div class="text-gray-500 text-[0.65rem] tracking-widest mt-1 uppercase">Active Ventures</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-black gold-text">3</div>
+          <div class="text-gray-500 text-[0.65rem] tracking-widest mt-1 uppercase">Markets Served</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-black gold-text">USA</div>
+          <div class="text-gray-500 text-[0.65rem] tracking-widest mt-1 uppercase">Headquarters</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-black gold-text">∞</div>
+          <div class="text-gray-500 text-[0.65rem] tracking-widest mt-1 uppercase">Potential</div>
+        </div>
       </div>
     </div>
 
     <!-- Scroll cue -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
-      <span class="text-[10px] text-slate-600 tracking-widest">SCROLL</span>
-      <svg class="w-4 h-4 text-[#00d4ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600 select-none pointer-events-none">
+      <span class="text-[0.6rem] tracking-widest uppercase">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-gray-600 to-transparent"></div>
     </div>
   </section>
 
-  <!-- ════════════════ ABOUT ════════════════ -->
-  <section id="about" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#128100; About Me</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Two Worlds, One Purpose</h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">I live at the intersection of sacred knowledge and modern technology — each discipline strengthening the other.</p>
-    </div>
 
-    <!-- Bento Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+  <!-- ═══════════════════════════════════════════════
+       PORTFOLIO
+  ═══════════════════════════════════════════════ -->
+  <section id="portfolio" class="section-alt py-24 px-4">
+    <div class="max-w-7xl mx-auto">
 
-      <!-- Bio card — wide -->
-      <div class="md:col-span-2 glass glass-hover rounded-2xl p-8 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
-        <div class="chip mb-5">&#128218; Scholar &amp; Strategist</div>
-        <p class="text-slate-300 leading-relaxed mb-4">
-          Alhamdulillah — I completed <strong class="text-white">Dawra-e-Hadith</strong>, the most advanced level of classical Islamic studies, which deepened my understanding of ethics, jurisprudence, and human behaviour. This foundation doesn't just guide my personal life; it governs every business decision I make.
-        </p>
-        <p class="text-slate-400 leading-relaxed text-sm">
-          Alongside this, I founded <strong class="text-[#00d4ff]">Setupline Agency</strong> — a full-service digital studio helping brands and entrepreneurs build impactful online presences. Integrity is not a tagline for me; it is a religious obligation.
+      <!-- Header -->
+      <div class="mb-16 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-px bg-gold"></div>
+          <span class="text-gold text-xs font-semibold tracking-[0.2em] uppercase">Our Portfolio</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
+          The <span class="gold-text">Ventures</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl text-base leading-relaxed">
+          A curated portfolio of digital-first businesses, each designed to lead and disrupt their respective markets.
         </p>
       </div>
 
-      <!-- Quick info card -->
-      <div class="glass glass-hover rounded-2xl p-6 flex flex-col gap-4">
-        <div class="chip">&#9881; Quick Info</div>
-        <ul class="space-y-3 mt-1">
-          <li class="flex items-start gap-3">
-            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
-            <div>
-              <div class="text-xs text-slate-500 font-medium tracking-wider">EDUCATION</div>
-              <div class="text-sm text-white font-semibold mt-0.5">Dawra-e-Hadith</div>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
-            <div>
-              <div class="text-xs text-slate-500 font-medium tracking-wider">BUSINESS</div>
-              <div class="text-sm text-white font-semibold mt-0.5">Setupline Agency</div>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
-            <div>
-              <div class="text-xs text-slate-500 font-medium tracking-wider">LOCATION</div>
-              <div class="text-sm text-white font-semibold mt-0.5">Bangladesh &#127988;</div>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
-            <div>
-              <div class="text-xs text-slate-500 font-medium tracking-wider">LANGUAGES</div>
-              <div class="text-sm text-white font-semibold mt-0.5">Bengali · Arabic · English</div>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#00d4ff] mt-0.5">&#9670;</span>
-            <div>
-              <div class="text-xs text-slate-500 font-medium tracking-wider">WEBSITE</div>
-              <div class="text-sm text-[#00d4ff] font-semibold mt-0.5">mrhasanmurad.com</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <!-- Bento grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- Arabic quote card -->
-      <div class="glass glass-hover rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.06),transparent_70%)]"></div>
-        <div class="arabic text-[#00d4ff] mb-3 relative">إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ</div>
-        <p class="text-slate-400 text-xs leading-relaxed relative">
-          "Indeed, Allah loves that when one of you does a job, he does it with <em class="text-[#00d4ff] not-italic">Itqan</em> (excellence)."<br />
-          <span class="text-slate-600 mt-1 block">— Prophet Muhammad ﷺ</span>
-        </p>
-      </div>
+        <!-- ① Setupline — wide -->
+        <div class="portfolio-card card-base reveal border border-white/[0.07] rounded-2xl p-8 lg:col-span-2 group cursor-default">
+          <div class="flex flex-col h-full">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-14 h-14 rounded-xl bg-blue-950/70 border border-blue-800/40 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950/50 border border-blue-800/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                <span class="text-blue-400 text-xs font-medium">Active</span>
+              </div>
+            </div>
 
-      <!-- Journey timeline — wide -->
-      <div class="md:col-span-2 glass glass-hover rounded-2xl p-8">
-        <div class="chip mb-6">&#128336; My Journey</div>
-        <div class="space-y-6">
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line flex-1 mt-1"></div>
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">
+              Setupline Agency
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
+              A premier digital infrastructure firm specializing in US/UK company formation, web development,
+              and compliance for global entrepreneurs. Empowering founders worldwide to establish and operate
+              legitimate businesses in top-tier jurisdictions.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="tag px-2.5 py-1 rounded-full bg-blue-950/50 border border-blue-800/30 text-blue-300 uppercase font-semibold">Company Formation</span>
+              <span class="tag px-2.5 py-1 rounded-full bg-blue-950/50 border border-blue-800/30 text-blue-300 uppercase font-semibold">Web Development</span>
+              <span class="tag px-2.5 py-1 rounded-full bg-blue-950/50 border border-blue-800/30 text-blue-300 uppercase font-semibold">Compliance</span>
+              <span class="tag px-2.5 py-1 rounded-full bg-blue-950/50 border border-blue-800/30 text-blue-300 uppercase font-semibold">Digital Infrastructure</span>
             </div>
-            <div class="pb-4">
-              <div class="text-xs text-[#00d4ff] font-mono mb-1">2019 — Present</div>
-              <div class="text-white font-bold">Founder — Setupline Agency</div>
-              <div class="text-slate-400 text-sm mt-1">Built a digital agency delivering web design, branding, and growth strategy to 150+ clients globally.</div>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line flex-1 mt-1"></div>
-            </div>
-            <div class="pb-4">
-              <div class="text-xs text-[#00d4ff] font-mono mb-1">2021 — 2024</div>
-              <div class="text-white font-bold">Dawra-e-Hadith — Advanced Islamic Studies</div>
-              <div class="text-slate-400 text-sm mt-1">Completed the highest level of Hadith sciences, studying the Six Books under certified scholars.</div>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-            </div>
-            <div>
-              <div class="text-xs text-[#00d4ff] font-mono mb-1">2018</div>
-              <div class="text-white font-bold">First Digital Project</div>
-              <div class="text-slate-400 text-sm mt-1">Launched first client website — the spark that ignited a passion for purposeful digital work.</div>
+
+            <div class="flex items-center gap-2 text-gray-600 group-hover:text-blue-400 transition-colors">
+              <span class="text-xs font-semibold tracking-widest uppercase">Explore</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
             </div>
           </div>
         </div>
-      </div>
 
+        <!-- ② Alacxa -->
+        <div class="portfolio-card card-base reveal border border-white/[0.07] rounded-2xl p-8 group cursor-default">
+          <div class="flex flex-col h-full">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+                <span class="text-gold text-xs font-medium">Active</span>
+              </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-gold-light transition-colors">Alacxa</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
+              A rapidly scaling global e-commerce brand operating across Amazon FBA and Walmart marketplaces,
+              specializing in premium home and kitchen products.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="tag px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold uppercase font-semibold">Amazon FBA</span>
+              <span class="tag px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold uppercase font-semibold">Walmart</span>
+              <span class="tag px-2.5 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold uppercase font-semibold">E-Commerce</span>
+            </div>
+
+            <div class="flex items-center gap-2 text-gray-600 group-hover:text-gold transition-colors">
+              <span class="text-xs font-semibold tracking-widest uppercase">Explore</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ Future Ventures — full width -->
+        <div class="portfolio-card reveal border border-dashed border-white/10 rounded-2xl p-8 lg:col-span-3 group cursor-default relative overflow-hidden"
+             style="background: linear-gradient(135deg, rgba(30,58,138,0.12) 0%, transparent 60%, rgba(201,168,76,0.04) 100%);">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+            <div class="flex items-start gap-5">
+              <div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center flex-wrap gap-2 mb-2">
+                  <h3 class="text-xl font-bold text-white">Future Ventures</h3>
+                  <span class="tag px-2.5 py-1 rounded-full bg-purple-950/50 border border-purple-700/30 text-purple-300 uppercase font-semibold">Incubation Pipeline</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed max-w-2xl">
+                  We are actively identifying and developing the next generation of digital ventures across fintech,
+                  SaaS, and high-growth emerging-market opportunities. The next chapter is being written now.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600 group-hover:text-white transition-colors flex-shrink-0">
+              <span class="text-xs font-semibold tracking-widest uppercase">Stay Tuned</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ════════════════ DUAL IDENTITY ════════════════ -->
-  <section id="identity" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#9889; Dual Identity</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Scholar &amp; Founder</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Two paths. One man. Fully committed to excellence in both.</p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <!-- ═══════════════════════════════════════════════
+       CORPORATE VALUES
+  ═══════════════════════════════════════════════ -->
+  <section id="values" class="relative py-24 px-4 overflow-hidden" style="background:#040810;">
+    <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-blue-950/10 blur-[140px] pointer-events-none"></div>
 
-      <!-- Islamic Scholar card -->
-      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden group">
-        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        <!-- Icon -->
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00d4ff22] to-[#0096c722] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-2xl mb-6">&#9728;&#65039;</div>
-        <div class="chip mb-4">&#127381; Religious Authority</div>
-        <h3 class="text-2xl font-black text-white mb-3">Specialized Islamic Scholar</h3>
-        <p class="text-slate-400 leading-relaxed mb-5 text-sm">
-          Holder of <strong class="text-white">Dawra-e-Hadith</strong> — the pinnacle of traditional Islamic education. My studies encompass Hadith sciences, Fiqh (Islamic jurisprudence), Tafsir, and Islamic ethics under certified chain of narration back to the Prophet ﷺ.
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <!-- Header -->
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-px bg-gold"></div>
+          <span class="text-gold text-xs font-semibold tracking-[0.2em] uppercase">Foundation</span>
+          <div class="w-8 h-px bg-gold"></div>
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
+          Corporate <span class="gold-text">Values</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
+          Our principles are not aspirational — they are operational. Every decision at MRH Murad LLC
+          is anchored in these foundational truths.
         </p>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Six Books of Hadith (Kutub al-Sittah)</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Islamic Jurisprudence &amp; Fatwa</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Quranic Exegesis (Tafsir)</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Ethics in Business &amp; Trade</div>
-        </div>
       </div>
 
-      <!-- Agency Founder card -->
-      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden group">
-        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00d4ff22] to-[#0096c722] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-2xl mb-6">&#128640;</div>
-        <div class="chip mb-4">&#128200; Digital Business</div>
-        <h3 class="text-2xl font-black text-white mb-3">Founder — Setupline Agency</h3>
-        <p class="text-slate-400 leading-relaxed mb-5 text-sm">
-          Setupline is a full-service digital agency where every project is handled with the same meticulous care demanded by Islamic standards of <em class="not-italic text-[#00d4ff]">Itqan</em> (excellence). We build brands, websites, and strategies that convert — with integrity at the core.
-        </p>
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Web Design &amp; Development</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Brand Identity &amp; Strategy</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> SEO &amp; Digital Marketing</div>
-          <div class="flex items-center gap-2 text-sm text-slate-400"><span class="text-[#00d4ff]">&#10003;</span> Business Consultation</div>
-        </div>
-      </div>
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    </div>
-  </section>
-
-  <!-- ════════════════ SERVICES ════════════════ -->
-  <section id="services" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#128188; Services</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">What I Build For You</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Every service is delivered with professionalism, speed, and ethical transparency.</p>
-    </div>
-
-    <!-- Bento service grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <!-- Service 1 -->
-      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)] group-hover:opacity-150 transition-opacity"></div>
-        <div class="text-3xl mb-4">&#127760;</div>
-        <h3 class="text-lg font-bold text-white mb-2">Web Design &amp; Dev</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Stunning, fast, and conversion-optimised websites built to reflect your brand identity.</p>
-        <div class="mt-4 flex flex-wrap gap-1">
-          <span class="chip text-[10px]">HTML5</span>
-          <span class="chip text-[10px]">Tailwind</span>
-          <span class="chip text-[10px]">WordPress</span>
-        </div>
-      </div>
-
-      <!-- Service 2 -->
-      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
-        <div class="text-3xl mb-4">&#128161;</div>
-        <h3 class="text-lg font-bold text-white mb-2">Brand Identity</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Logo design, colour palettes, and brand guidelines that communicate trust at a glance.</p>
-        <div class="mt-4 flex flex-wrap gap-1">
-          <span class="chip text-[10px]">Logo</span>
-          <span class="chip text-[10px]">Guidelines</span>
-          <span class="chip text-[10px]">Assets</span>
-        </div>
-      </div>
-
-      <!-- Service 3 -->
-      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
-        <div class="text-3xl mb-4">&#128269;</div>
-        <h3 class="text-lg font-bold text-white mb-2">SEO &amp; Growth</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Organic search strategies that put your business in front of the right audience consistently.</p>
-        <div class="mt-4 flex flex-wrap gap-1">
-          <span class="chip text-[10px]">On-Page</span>
-          <span class="chip text-[10px]">Technical</span>
-          <span class="chip text-[10px]">Content</span>
-        </div>
-      </div>
-
-      <!-- Service 4 -->
-      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
-        <div class="text-3xl mb-4">&#128293;</div>
-        <h3 class="text-lg font-bold text-white mb-2">Social Media</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Compelling content strategies that grow engaged audiences and drive real business results.</p>
-        <div class="mt-4 flex flex-wrap gap-1">
-          <span class="chip text-[10px]">Strategy</span>
-          <span class="chip text-[10px]">Content</span>
-          <span class="chip text-[10px]">Analytics</span>
-        </div>
-      </div>
-
-      <!-- Service 5 -->
-      <div class="glass glass-hover rounded-2xl p-6 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle,rgba(0,212,255,0.08),transparent_70%)]"></div>
-        <div class="text-3xl mb-4">&#128172;</div>
-        <h3 class="text-lg font-bold text-white mb-2">Business Consulting</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Strategic guidance rooted in Islamic business ethics — Halal growth, honest counsel.</p>
-        <div class="mt-4 flex flex-wrap gap-1">
-          <span class="chip text-[10px]">Strategy</span>
-          <span class="chip text-[10px]">Ethics</span>
-          <span class="chip text-[10px]">Growth</span>
-        </div>
-      </div>
-
-      <!-- Service 6 — CTA tile -->
-      <div class="glass rounded-2xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden border border-[rgba(0,212,255,0.25)] animate-pulse-neon">
-        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.06)] to-transparent"></div>
-        <div class="text-3xl mb-3 relative">&#9997;&#65039;</div>
-        <h3 class="text-lg font-bold text-white mb-2 relative">Custom Project?</h3>
-        <p class="text-slate-400 text-sm mb-4 relative">Let's discuss your unique needs and build something extraordinary together.</p>
-        <a href="#contact" class="btn-neon text-xs py-2 px-5 relative"><span>Let's Talk</span></a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ════════════════ VALUES ════════════════ -->
-  <section id="values" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#10024; Core Values</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Built on Islamic Ethics</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">These aren't marketing words. They are commandments I answer to before Allah.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-
-      <!-- Amanah -->
-      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.04)] to-transparent"></div>
-        <div class="relative">
-          <!-- Arabic + English -->
-          <div class="flex items-start gap-5 mb-5">
-            <div class="text-4xl font-black neon-text">أ</div>
-            <div>
-              <div class="text-xl font-black text-white">Amanah — Trust</div>
-              <div class="text-[#00d4ff] text-sm font-medium">أَمَانَة</div>
-            </div>
+        <!-- Amanah -->
+        <div class="card-base reveal border border-white/[0.07] rounded-2xl p-8 text-center group">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center transition-all group-hover:border-gold/50 group-hover:shadow-[0_0_24px_rgba(201,168,76,0.2)]">
+            <span class="text-2xl font-black gold-text select-none">أ</span>
           </div>
-          <p class="text-slate-400 leading-relaxed text-sm mb-5">
-            <strong class="text-white">Amanah</strong> means I treat your project as a sacred responsibility. Your data, your money, your vision — I guard them as a trustee, not merely as a contractor. In Islam, betraying a trust is among the gravest sins. I do not take that lightly.
+          <p class="text-gold text-xs font-semibold tracking-[0.2em] uppercase mb-1">Amanah</p>
+          <h3 class="text-xl font-bold text-white mb-4">Trust</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            We operate with the highest standard of integrity. Every partnership, every commitment,
+            every contract is honored with unwavering reliability — because trust is the bedrock of
+            all sustainable business.
           </p>
-          <div class="bg-[rgba(0,212,255,0.06)] border-l-2 border-[#00d4ff] pl-4 py-2 rounded-r text-xs text-slate-400 italic">
-            "The signs of the hypocrite are three: when he speaks he lies, when he promises he breaks it, and when he is entrusted he betrays." — Prophet Muhammad ﷺ
-          </div>
         </div>
-      </div>
 
-      <!-- Sidq -->
-      <div class="glass glass-hover rounded-2xl p-8 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-[rgba(0,212,255,0.04)] to-transparent"></div>
-        <div class="relative">
-          <div class="flex items-start gap-5 mb-5">
-            <div class="text-4xl font-black neon-text">ص</div>
-            <div>
-              <div class="text-xl font-black text-white">Sidq — Honesty</div>
-              <div class="text-[#00d4ff] text-sm font-medium">صِدْق</div>
-            </div>
+        <!-- Sidq — highlighted -->
+        <div class="card-base reveal border border-white/[0.07] rounded-2xl p-8 text-center group relative overflow-hidden">
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-900/20 border border-blue-700/30 flex items-center justify-center transition-all group-hover:border-blue-500/60 group-hover:shadow-[0_0_24px_rgba(59,130,246,0.2)]">
+            <span class="text-2xl font-black text-blue-400 select-none">ص</span>
           </div>
-          <p class="text-slate-400 leading-relaxed text-sm mb-5">
-            <strong class="text-white">Sidq</strong> means you receive truth — not flattery. I will tell you honestly if a strategy won't work, if a timeline is unrealistic, or if a budget is insufficient. Honest advice is more valuable than a comfortable lie that wastes your resources.
+          <p class="text-blue-400 text-xs font-semibold tracking-[0.2em] uppercase mb-1">Sidq</p>
+          <h3 class="text-xl font-bold text-white mb-4">Honesty</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Transparency is non-negotiable. We maintain absolute honesty with our partners, clients,
+            and subsidiaries — in our reporting, our promises, and our strategies at every level.
           </p>
-          <div class="bg-[rgba(0,212,255,0.06)] border-l-2 border-[#00d4ff] pl-4 py-2 rounded-r text-xs text-slate-400 italic">
-            "Hold fast to truthfulness, for indeed truthfulness leads to righteousness, and righteousness leads to Paradise." — Prophet Muhammad ﷺ
-          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Values strip -->
-    <div class="glass rounded-2xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-      <div>
-        <div class="text-2xl mb-2">&#9989;</div>
-        <div class="text-sm font-bold text-white">No Hidden Fees</div>
-        <div class="text-xs text-slate-500 mt-1">Full transparency on pricing</div>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">&#128274;</div>
-        <div class="text-sm font-bold text-white">Data Privacy</div>
-        <div class="text-xs text-slate-500 mt-1">Your info stays yours</div>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">&#128336;</div>
-        <div class="text-sm font-bold text-white">On-Time Delivery</div>
-        <div class="text-xs text-slate-500 mt-1">Commitments are kept</div>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">&#129309;</div>
-        <div class="text-sm font-bold text-white">Halal Business</div>
-        <div class="text-xs text-slate-500 mt-1">Ethically sound, always</div>
+        <!-- Excellence -->
+        <div class="card-base reveal border border-white/[0.07] rounded-2xl p-8 text-center group">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-emerald-900/20 border border-emerald-700/30 flex items-center justify-center transition-all group-hover:border-emerald-500/60 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <p class="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase mb-1">Excellence</p>
+          <h3 class="text-xl font-bold text-white mb-4">Operational Mastery</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            We are relentless in the pursuit of excellence. Across every border and every business unit,
+            we demand the highest standards of performance, efficiency, and flawless execution.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ════════════════ STATS ════════════════ -->
-  <section id="stats" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#128202; Numbers</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Proven Track Record</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Results speak louder than promises. Here's what Amanah and Sidq deliver.</p>
-    </div>
 
-    <!-- Big stats bento -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
-      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
-        <div class="stat-val text-5xl font-black neon-text mb-2 relative">150+</div>
-        <div class="text-white font-semibold relative">Projects Delivered</div>
-        <div class="text-slate-500 text-xs mt-1 relative">Across 15+ countries</div>
-      </div>
-      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
-        <div class="stat-val text-5xl font-black neon-text mb-2 relative">98%</div>
-        <div class="text-white font-semibold relative">Satisfaction Rate</div>
-        <div class="text-slate-500 text-xs mt-1 relative">Verified client feedback</div>
-      </div>
-      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
-        <div class="stat-val text-5xl font-black neon-text mb-2 relative">5+</div>
-        <div class="text-white font-semibold relative">Years Experience</div>
-        <div class="text-slate-500 text-xs mt-1 relative">In digital services</div>
-      </div>
-      <div class="glass glass-hover rounded-2xl p-8 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,255,0.07),transparent_70%)]"></div>
-        <div class="stat-val text-5xl font-black neon-text mb-2 relative">2</div>
-        <div class="text-white font-semibold relative">Fields Mastered</div>
-        <div class="text-slate-500 text-xs mt-1 relative">Deen &amp; Digital</div>
-      </div>
-    </div>
+  <!-- ═══════════════════════════════════════════════
+       GLOBAL FOOTPRINT
+  ═══════════════════════════════════════════════ -->
+  <section id="global" class="section-alt py-24 px-4 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-    <!-- Skill bars -->
-    <div class="glass rounded-2xl p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="space-y-5">
-        <div class="chip mb-2">&#127919; Skill Mastery</div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">Islamic Scholarship</span>
-            <span class="text-[#00d4ff] font-mono">100%</span>
+        <!-- Left text -->
+        <div class="reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-px bg-gold"></div>
+            <span class="text-gold text-xs font-semibold tracking-[0.2em] uppercase">Global Presence</span>
           </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:100%"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">Web Design</span>
-            <span class="text-[#00d4ff] font-mono">95%</span>
-          </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:95%"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">Brand Strategy</span>
-            <span class="text-[#00d4ff] font-mono">90%</span>
-          </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:90%"></div>
-          </div>
-        </div>
-      </div>
-      <div class="space-y-5">
-        <div class="chip mb-2">&#128200; Business Metrics</div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">Client Satisfaction</span>
-            <span class="text-[#00d4ff] font-mono">98%</span>
-          </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:98%"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">On-Time Delivery</span>
-            <span class="text-[#00d4ff] font-mono">96%</span>
-          </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:96%"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-white font-medium">Repeat Clients</span>
-            <span class="text-[#00d4ff] font-mono">85%</span>
-          </div>
-          <div class="h-1 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-            <div class="bar-fill" style="width:85%"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+            Bridging <span class="gold-text">Markets,</span><br />
+            Connecting <span class="gold-text">Opportunity.</span>
+          </h2>
+          <p class="text-gray-400 text-base leading-relaxed mb-10">
+            MRH Murad LLC operates at the intersection of the United States and the Asia-Pacific region,
+            leveraging the regulatory strength and market access of the USA alongside the dynamic growth
+            potential of APAC economies.
+          </p>
 
-  <!-- ════════════════ TESTIMONIALS ════════════════ -->
-  <section class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#128172; Testimonials</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">What Clients Say</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <div class="glass glass-hover rounded-2xl p-6">
-        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">"Hasan delivered beyond our expectations. His professionalism and attention to detail are unmatched. The website he built for us tripled our inquiry rate."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">AR</div>
-          <div>
-            <div class="text-white font-semibold text-sm">Ahmed Rahman</div>
-            <div class="text-slate-500 text-xs">E-commerce Entrepreneur</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass glass-hover rounded-2xl p-6">
-        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">"His Islamic background gives him a unique perspective on ethical business. He's honest about timelines and never overpromises. Rare quality."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">SK</div>
-          <div>
-            <div class="text-white font-semibold text-sm">Sarah Khan</div>
-            <div class="text-slate-500 text-xs">Brand Director, Dubai</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass glass-hover rounded-2xl p-6">
-        <div class="flex gap-1 text-[#00d4ff] mb-4 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">"Setupline transformed our online presence completely. Hasan's strategic guidance helped us achieve 200% growth in organic traffic within 4 months."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#00d4ff33] to-[#0096c733] border border-[rgba(0,212,255,0.3)] flex items-center justify-center text-xs font-bold text-[#00d4ff]">MI</div>
-          <div>
-            <div class="text-white font-semibold text-sm">Mohammed Islam</div>
-            <div class="text-slate-500 text-xs">CEO, TechStart BD</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════ CONTACT ════════════════ -->
-  <section id="contact" class="relative z-10 py-24 px-6 md:px-12 max-w-7xl mx-auto reveal">
-    <div class="text-center mb-16">
-      <div class="chip mb-4">&#128222; Get In Touch</div>
-      <h2 class="text-3xl md:text-5xl font-black grad-text mb-4">Let's Build Together</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Ready to start a project built on trust and excellence? I'd love to hear from you.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
-
-      <!-- Contact info -->
-      <div class="md:col-span-2 glass rounded-2xl p-8 flex flex-col gap-6">
-        <div class="chip">&#9993; Contact Info</div>
-
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128140;</div>
-          <div>
-            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">WEBSITE</div>
-            <div class="text-white font-semibold">mrhasanmurad.com</div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128203;</div>
-          <div>
-            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">AGENCY</div>
-            <div class="text-white font-semibold">Setupline Agency</div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#127757;</div>
-          <div>
-            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">LOCATION</div>
-            <div class="text-white font-semibold">Bangladesh (Remote Worldwide)</div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.2)] flex items-center justify-center text-[#00d4ff] flex-shrink-0">&#128337;</div>
-          <div>
-            <div class="text-xs text-slate-500 font-medium tracking-wider mb-1">RESPONSE TIME</div>
-            <div class="text-white font-semibold">Within 24 Hours</div>
-          </div>
-        </div>
-
-        <!-- Value reminder -->
-        <div class="mt-auto glass border-[rgba(0,212,255,0.2)] rounded-xl p-4 text-center">
-          <div class="text-xs text-slate-500 mb-1">Promise to every client</div>
-          <div class="text-[#00d4ff] font-bold">Amanah &amp; Sidq</div>
-          <div class="text-xs text-slate-500">Trust &amp; Honesty — always</div>
-        </div>
-      </div>
-
-      <!-- Contact form -->
-      <div class="md:col-span-3 glass rounded-2xl p-8">
-        <div class="chip mb-6">&#9997;&#65039; Send a Message</div>
-        <form id="contactForm" class="space-y-5" onsubmit="handleForm(event)">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR NAME</label>
-              <input type="text" placeholder="John Doe" required
-                class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all" />
+          <div class="space-y-4">
+            <!-- USA -->
+            <div class="flex items-start gap-4 p-5 rounded-xl border border-white/[0.07]"
+                 style="background:linear-gradient(145deg,#0d1b2a,#0a1628);">
+              <div class="w-10 h-10 rounded-lg bg-blue-950/60 border border-blue-800/30 flex items-center justify-center flex-shrink-0 mt-0.5 text-base">🇺🇸</div>
+              <div>
+                <p class="font-semibold text-white text-sm mb-1">United States — Headquarters</p>
+                <p class="text-gray-500 text-xs leading-relaxed">Florida-incorporated LLC serving as the central holding entity and primary operational hub, fully compliant with US federal and state regulations.</p>
+              </div>
             </div>
-            <div>
-              <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR EMAIL</label>
-              <input type="email" placeholder="you@example.com" required
-                class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all" />
+
+            <!-- APAC -->
+            <div class="flex items-start gap-4 p-5 rounded-xl border border-white/[0.07]"
+                 style="background:linear-gradient(145deg,#0d1b2a,#0a1628);">
+              <div class="w-10 h-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5 text-base">🌏</div>
+              <div>
+                <p class="font-semibold text-white text-sm mb-1">APAC Region — Operations</p>
+                <p class="text-gray-500 text-xs leading-relaxed">Active operational and sourcing presence across Asia-Pacific markets, enabling efficient supply chains, talent acquisition, and market access for our e-commerce and digital service verticals.</p>
+              </div>
+            </div>
+
+            <!-- UK -->
+            <div class="flex items-start gap-4 p-5 rounded-xl border border-white/[0.07]"
+                 style="background:linear-gradient(145deg,#0d1b2a,#0a1628);">
+              <div class="w-10 h-10 rounded-lg bg-purple-950/50 border border-purple-800/30 flex items-center justify-center flex-shrink-0 mt-0.5 text-base">🇬🇧</div>
+              <div>
+                <p class="font-semibold text-white text-sm mb-1">United Kingdom — Compliance Services</p>
+                <p class="text-gray-500 text-xs leading-relaxed">Through Setupline Agency, we offer UK company formation and regulatory compliance services, connecting global entrepreneurs to one of the world's premier business jurisdictions.</p>
+              </div>
             </div>
           </div>
-          <div>
-            <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">PROJECT TYPE</label>
-            <select class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white text-sm outline-none focus:border-[#00d4ff] transition-all appearance-none cursor-pointer">
-              <option value="" class="bg-[#050d12]">Select a service...</option>
-              <option value="web" class="bg-[#050d12]">Web Design &amp; Development</option>
-              <option value="brand" class="bg-[#050d12]">Brand Identity</option>
-              <option value="seo" class="bg-[#050d12]">SEO &amp; Growth</option>
-              <option value="social" class="bg-[#050d12]">Social Media</option>
-              <option value="consult" class="bg-[#050d12]">Business Consulting</option>
-              <option value="other" class="bg-[#050d12]">Other</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-slate-400 font-medium tracking-wider block mb-2">YOUR MESSAGE</label>
-            <textarea rows="5" placeholder="Tell me about your project..." required
-              class="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(0,212,255,0.15)] rounded-lg px-4 py-3 text-white placeholder-slate-600 text-sm outline-none focus:border-[#00d4ff] focus:shadow-[0_0_12px_rgba(0,212,255,0.15)] transition-all resize-none"></textarea>
-          </div>
-          <button type="submit" class="btn-neon w-full justify-center">
-            <span>Send Message &#10142;</span>
-          </button>
-          <p id="formMsg" class="text-center text-[#00d4ff] text-sm hidden">JazakAllah Khair! Your message was sent. I'll reply within 24 hours In sha Allah.</p>
-        </form>
-      </div>
+        </div>
 
+        <!-- Right visual -->
+        <div class="reveal">
+          <div class="border border-white/[0.07] rounded-2xl p-8 relative overflow-hidden"
+               style="background:linear-gradient(135deg,rgba(30,58,138,0.15) 0%,#0d1b2a 60%,rgba(201,168,76,0.04) 100%);">
+
+            <div class="text-center mb-8">
+              <p class="text-gray-500 text-[0.65rem] tracking-widest uppercase mb-1">Operational Presence</p>
+              <p class="text-white font-bold text-lg">Multi-Continental Operations</p>
+            </div>
+
+            <!-- Globe vis -->
+            <div class="relative h-52 flex items-center justify-center mb-8">
+              <!-- Rings -->
+              <div class="absolute w-20 h-20 rounded-full border border-gold/30 ring-pulse"></div>
+              <div class="absolute w-36 h-36 rounded-full border border-gold/15 ring-pulse-delay"></div>
+              <div class="absolute w-52 h-52 rounded-full border border-gold/05 ring-pulse" style="animation-delay:2s;"></div>
+
+              <!-- Centre dot -->
+              <div class="w-3 h-3 rounded-full bg-gold shadow-[0_0_20px_rgba(201,168,76,0.9)] z-10"></div>
+
+              <!-- Location dots -->
+              <div class="absolute top-5 left-6 flex flex-col items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)] mb-1"></div>
+                <span class="text-blue-300 text-[0.6rem] font-semibold">Florida, USA</span>
+              </div>
+
+              <div class="absolute top-5 right-6 flex flex-col items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_12px_rgba(192,132,252,0.9)] mb-1"></div>
+                <span class="text-purple-300 text-[0.6rem] font-semibold">United Kingdom</span>
+              </div>
+
+              <div class="absolute bottom-5 right-10 flex flex-col items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-gold shadow-[0_0_12px_rgba(201,168,76,0.9)] mb-1"></div>
+                <span class="text-gold text-[0.6rem] font-semibold">APAC Region</span>
+              </div>
+            </div>
+
+            <!-- Mini stats -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/5">
+              <div class="text-center">
+                <div class="text-2xl font-black gold-text">3+</div>
+                <div class="text-gray-600 text-[0.6rem] mt-1 uppercase tracking-wider">Regions</div>
+              </div>
+              <div class="text-center border-x border-white/5">
+                <div class="text-2xl font-black gold-text">2</div>
+                <div class="text-gray-600 text-[0.6rem] mt-1 uppercase tracking-wider">Continents</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-black gold-text">∞</div>
+                <div class="text-gray-600 text-[0.6rem] mt-1 uppercase tracking-wider">Growth</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ════════════════ FOOTER ════════════════ -->
-  <footer class="relative z-10 border-t border-[rgba(0,212,255,0.08)] py-10 px-6 md:px-12">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#0096c7] flex items-center justify-center text-[#050d12] font-black text-sm">HM</div>
-        <div>
-          <div class="text-white font-bold text-sm">Mr. Hasan Murad</div>
-          <div class="text-slate-600 text-xs">Scholar · Founder · Strategist</div>
+
+  <!-- ═══════════════════════════════════════════════
+       CONTACT + FOOTER
+  ═══════════════════════════════════════════════ -->
+  <section id="contact" class="relative pt-24 pb-0 px-4 overflow-hidden" style="background:#040810;">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full bg-blue-950/10 blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <!-- Header -->
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-px bg-gold"></div>
+          <span class="text-gold text-xs font-semibold tracking-[0.2em] uppercase">Contact</span>
+          <div class="w-8 h-px bg-gold"></div>
         </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
+          Let's <span class="gold-text">Connect.</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
+          Whether you're a prospective partner, entrepreneur, or investor — we welcome meaningful conversations.
+        </p>
       </div>
 
-      <div class="flex items-center gap-2 text-xs text-slate-600">
-        <span class="text-[#00d4ff] font-semibold">أَمَانَة</span>
-        <span>·</span>
-        <span class="text-[#00d4ff] font-semibold">صِدْق</span>
-        <span>·</span>
-        <span>Amanah &amp; Sidq</span>
+      <!-- Contact cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20 reveal">
+
+        <!-- Phone -->
+        <div class="card-base border border-white/[0.07] rounded-2xl p-6 text-center group">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-blue-950/60 border border-blue-800/30 flex items-center justify-center group-hover:border-blue-500/50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <p class="text-gray-500 text-[0.65rem] tracking-widest uppercase mb-3">Phone</p>
+          <a href="tel:+17866198222" class="block text-white font-medium text-sm hover:text-blue-300 transition-colors mb-1">+1 (786) 619-8222</a>
+          <a href="tel:+12132210369" class="block text-white font-medium text-sm hover:text-blue-300 transition-colors">+1 (213) 221-0369</a>
+        </div>
+
+        <!-- Email -->
+        <div class="card-base border border-white/[0.07] rounded-2xl p-6 text-center group">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:border-gold/50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <p class="text-gray-500 text-[0.65rem] tracking-widest uppercase mb-3">Email</p>
+          <a href="mailto:info@mrhmuradllc.com" class="block text-white font-medium text-sm hover:text-gold transition-colors">info@mrhmuradllc.com</a>
+          <p class="text-gray-600 text-xs mt-1">mrhmuradllc.com</p>
+        </div>
+
+        <!-- Location -->
+        <div class="card-base border border-white/[0.07] rounded-2xl p-6 text-center group">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-emerald-950/50 border border-emerald-800/30 flex items-center justify-center group-hover:border-emerald-500/50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <p class="text-gray-500 text-[0.65rem] tracking-widest uppercase mb-3">Registered</p>
+          <p class="text-white font-medium text-sm">State of Florida</p>
+          <p class="text-gray-500 text-xs mt-1">United States of America</p>
+        </div>
+
       </div>
 
-      <div class="text-xs text-slate-600 text-center md:text-right">
-        &copy; <span id="year"></span> mrhasanmurad.com &bull; Built with excellence
-      </div>
+      <!-- Gold divider -->
+      <div class="gold-divider mb-10"></div>
+
+      <!-- Footer proper -->
+      <footer class="pb-10">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-10">
+
+          <!-- Brand block -->
+          <div class="max-w-xs">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded bg-gradient-to-br from-yellow-600 to-yellow-400 flex items-center justify-center flex-shrink-0">
+                <span class="text-black font-black text-sm leading-none">M</span>
+              </div>
+              <span class="font-bold text-white tracking-wider text-sm">MRH MURAD<span class="text-gold"> LLC</span></span>
+            </div>
+            <p class="text-gray-600 text-xs leading-relaxed mb-2">
+              A Florida-registered holding company. All subsidiaries and ventures operate under
+              MRH Murad LLC as the parent entity.
+            </p>
+            <p class="text-gray-700 text-xs">mrhmuradllc.com</p>
+          </div>
+
+          <!-- Link columns -->
+          <div class="flex flex-wrap gap-10">
+            <div>
+              <p class="text-gray-600 text-[0.6rem] tracking-widest uppercase mb-3">Company</p>
+              <div class="space-y-2">
+                <a href="#portfolio" class="block text-gray-500 hover:text-white text-xs transition-colors">Portfolio</a>
+                <a href="#values"    class="block text-gray-500 hover:text-white text-xs transition-colors">Values</a>
+                <a href="#global"    class="block text-gray-500 hover:text-white text-xs transition-colors">Global Footprint</a>
+              </div>
+            </div>
+            <div>
+              <p class="text-gray-600 text-[0.6rem] tracking-widest uppercase mb-3">Ventures</p>
+              <div class="space-y-2">
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Setupline Agency</a>
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Alacxa</a>
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Future Ventures</a>
+              </div>
+            </div>
+            <div>
+              <p class="text-gray-600 text-[0.6rem] tracking-widest uppercase mb-3">Legal</p>
+              <div class="space-y-2">
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Privacy Policy</a>
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Terms of Service</a>
+                <a href="#" class="block text-gray-500 hover:text-white text-xs transition-colors">Disclaimer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p class="text-gray-700 text-xs">
+            &copy; 2025 MRH Murad LLC. All rights reserved. Registered in the State of Florida, USA.
+          </p>
+          <p class="text-gray-700 text-xs">
+            Built on&nbsp;
+            <span class="text-gold/60">Amanah</span>&nbsp;&middot;&nbsp;
+            <span class="text-gold/60">Sidq</span>&nbsp;&middot;&nbsp;
+            <span class="text-gold/60">Excellence</span>
+          </p>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </section>
 
-  <!-- ════════════════ SCRIPTS ════════════════ -->
+
+  <!-- ═══════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════ -->
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    /* ── Mobile menu toggle ── */
+    const menuBtn   = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const iconOpen  = document.getElementById('iconOpen');
+    const iconClose = document.getElementById('iconClose');
 
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    menuBtn.addEventListener('click', () => {
+      const open = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', open);
+      iconOpen.classList.toggle('hidden', !open);
+      iconClose.classList.toggle('hidden', open);
+    });
 
-    // Form mock handler
-    function handleForm(e) {
-      e.preventDefault();
-      const msg = document.getElementById('formMsg');
-      msg.classList.remove('hidden');
-      e.target.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
-    }
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
       });
     });
 
-    // Mobile nav toggle (hamburger) — handled by simple class toggle
-    // (Full nav visible on md+, hidden below — add burger if needed)
+    /* ── Active nav link on scroll ── */
+    const sections  = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('a.nav-link');
+
+    const setActive = () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+      });
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${current}`;
+        link.classList.toggle('text-white', active);
+        link.classList.toggle('text-gray-400', !active);
+      });
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+
+    /* ── Scroll-reveal via IntersectionObserver ── */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
+
 </body>
 </html>
