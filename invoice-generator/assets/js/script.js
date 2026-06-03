@@ -169,6 +169,8 @@ function collectData() {
     currency,
     currencySymbol: sym,
     notes:         document.getElementById('notes').value.trim(),
+    bankDetails:   document.getElementById('bankDetails').value.trim(),
+    paymentLink:   document.getElementById('paymentLink').value.trim(),
     items,
     subtotal,
     taxRate,

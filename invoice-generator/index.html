@@ -152,6 +152,13 @@
                 <option value="Overdue">Overdue</option>
               </select>
             </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">Payment Link
+                <span class="text-gray-400 font-normal">(e.g. Stripe, PayPal)</span>
+              </label>
+              <input type="url" id="paymentLink" placeholder="https://buy.stripe.com/your-link"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition" />
+            </div>
           </div>
         </div>
       </div>
@@ -235,11 +242,24 @@
         </div>
       </div>
 
-      <!-- ── Notes ── -->
+      <!-- ── Notes & Payment ── -->
       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h2 class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-3">Notes / Payment Instructions</h2>
-        <textarea id="notes" rows="3" placeholder="Bank transfer details, payment terms, thank-you note..."
-          class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition resize-none"></textarea>
+        <h2 class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-4">Notes / Payment Instructions</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Additional Notes</label>
+            <textarea id="notes" rows="2" placeholder="Payment terms, thank-you note, special instructions..."
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition resize-none"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Bank Transfer Details
+              <span class="text-gray-400 font-normal">(shown in PDF &amp; email)</span>
+            </label>
+            <textarea id="bankDetails" rows="4"
+              placeholder="Bank Name: Example Bank&#10;Account Name: Setupline Agency&#10;Account Number: XXXX-XXXX-XXXX&#10;Routing / Sort Code: XXXXXXXX&#10;IBAN / SWIFT: XXXXXXXXXX&#10;Reference: Invoice Number"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition resize-none font-mono"></textarea>
+          </div>
+        </div>
       </div>
 
       <!-- ── Action Buttons ── -->

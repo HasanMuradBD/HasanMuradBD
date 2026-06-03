@@ -9,6 +9,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+/* ─────────────────────────────────────────────────────────────
+   BRANDING — replace the URL below with your own logo image.
+   Use a publicly accessible HTTPS URL (e.g. your CDN or website).
+   Recommended size: 200×60 px, transparent PNG.
+   Set to empty string '' to fall back to the text logo.
+   ───────────────────────────────────────────────────────────── */
+define('LOGO_URL', 'https://yourdomain.com/assets/setupline-logo.png');
+
 header('Content-Type: application/pdf');
 
 /* ── Read & decode input ── */
@@ -40,7 +48,9 @@ $invoiceDate   = e($data['invoiceDate']   ?? '');
 $dueDate       = e($data['dueDate']       ?? '');
 $paymentStatus = e($data['paymentStatus'] ?? 'Unpaid');
 $currencySymbol= e($data['currencySymbol'] ?? '$');
-$notes         = nl2br(e($data['notes']   ?? ''));
+$notes         = nl2br(e($data['notes']       ?? ''));
+$bankDetails   = nl2br(e($data['bankDetails'] ?? ''));
+$paymentLink   = e($data['paymentLink']       ?? '');
 $items         = $data['items']     ?? [];
 $subtotal      = (float)($data['subtotal']  ?? 0);
 $taxRate       = (float)($data['taxRate']   ?? 0);
@@ -129,7 +139,16 @@ $html = <<<HTML
   <!-- Header -->
   <div class="header">
     <div class="header-left">
-      <div><span class="logo-setup">SETUP</span><span class="logo-line">LINE</span></div>
+HTML;
+
+/* Render image logo if URL is set, otherwise fall back to styled text */
+if (!empty(LOGO_URL)) {
+    $html .= "      <div><img src=\"" . LOGO_URL . "\" alt=\"Setupline\" style=\"max-height:52px; max-width:200px;\"/></div>\n";
+} else {
+    $html .= "      <div><span class=\"logo-setup\">SETUP</span><span class=\"logo-line\">LINE</span></div>\n";
+}
+
+$html .= <<<HTML
       <div style="font-size:11px; color:#6b7280; margin-top:4px;">{$fromName}</div>
     </div>
     <div class="header-right">
@@ -209,14 +228,36 @@ $html = <<<HTML
   </div>
   <div style="clear:both;"></div>
 
-  <!-- Notes -->
+  <!-- Payment Link (below totals) -->
 HTML;
 
-if (!empty(strip_tags($notes))) {
+if (!empty($paymentLink)) {
+    $html .= "
+  <div style='margin-top:20px; text-align:right;'>
+    <a href='{$paymentLink}'
+       style='display:inline-block; background:#4f46e5; color:#ffffff; font-size:13px; font-weight:700;
+              padding:10px 24px; border-radius:8px; text-decoration:none; letter-spacing:0.3px;'>
+      Pay Invoice Online &#8594;
+    </a>
+    <div style='font-size:10px; color:#9ca3af; margin-top:5px;'>{$paymentLink}</div>
+  </div>";
+}
+
+/* Combine notes + bank details into one notes block */
+$notesContent  = '';
+if (!empty(strip_tags($notes)))       $notesContent .= $notes;
+if (!empty(strip_tags($bankDetails))) {
+    if ($notesContent) $notesContent .= '<br/><br/>';
+    $notesContent .= '<strong>Bank Transfer Details:</strong><br/>' . $bankDetails;
+}
+
+$html .= '  <!-- Notes -->' . PHP_EOL;
+
+if ($notesContent) {
     $html .= "
   <div class='notes-box'>
     <div class='section-title' style='margin-bottom:4px;'>Notes &amp; Payment Instructions</div>
-    <div style='font-size:12px; color:#374151; line-height:1.7;'>{$notes}</div>
+    <div style='font-size:12px; color:#374151; line-height:1.7;'>{$notesContent}</div>
   </div>";
 }
 
