@@ -8,6 +8,8 @@ use App\Models\TestResponse;
 use App\Services\BandCalculatorService;
 use App\Services\SkillSnapshotService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class TestAttemptController extends Controller
@@ -53,27 +55,37 @@ class TestAttemptController extends Controller
             'timed_out'  => 'nullable|boolean',
         ]);
 
-        // Persist each response
+        // Eager-load questions once to avoid N+1 inside the loop
+        $questions = $attempt->test->questions()->get()->keyBy('id');
+
+        $responses = [];
         foreach ($data['answers'] as $questionId => $answer) {
-            $question = $attempt->test->questions->find($questionId);
+            $question = $questions->get($questionId);
             if (!$question) continue;
 
             $isCorrect = strtolower(trim($answer)) === strtolower(trim($question->correct_answer));
 
-            TestResponse::create([
+            $responses[] = [
                 'test_attempt_id'    => $attempt->id,
                 'question_id'        => $questionId,
                 'user_answer'        => $answer,
                 'is_correct'         => $isCorrect,
                 'time_spent_seconds' => $data['timings'][$questionId] ?? null,
-            ]);
+                'flagged_for_review' => false,
+                'error_tag'          => null,
+            ];
+        }
+
+        // Bulk insert responses (one query instead of N)
+        if ($responses) {
+            TestResponse::insert($responses);
         }
 
         $status = $request->boolean('timed_out') ? 'timed_out' : 'completed';
 
         $attempt->update([
-            'status'           => $status,
-            'submitted_at'     => now(),
+            'status'             => $status,
+            'submitted_at'       => now(),
             'time_taken_seconds' => now()->diffInSeconds($attempt->started_at),
         ]);
 
@@ -82,6 +94,9 @@ class TestAttemptController extends Controller
 
         // Refresh skill snapshots
         app(SkillSnapshotService::class)->refreshForUser($attempt->user_id);
+
+        // Bust analytics cache for this user
+        Cache::forget("analytics_{$attempt->user_id}");
 
         // If this was the diagnostic, auto-generate the study plan and complete onboarding
         if ($attempt->is_diagnostic) {

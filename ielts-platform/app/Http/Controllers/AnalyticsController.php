@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -11,6 +12,16 @@ class AnalyticsController extends Controller
     {
         $user = $request->user();
 
+        // Cache per user for 1 hour; busted on new test submission
+        $cached = Cache::remember("analytics_{$user->id}", 3600, fn() => $this->buildAnalytics($user));
+
+        return Inertia::render('Analytics/Index', array_merge($cached, [
+            'daysUntilExam' => $user->daysUntilExam(),
+        ]));
+    }
+
+    private function buildAnalytics($user): array
+    {
         // Per-module band history (chronological, all completed attempts)
         $bandHistory = $user->testAttempts()
             ->with('sections')
@@ -118,7 +129,7 @@ class AnalyticsController extends Controller
                 'is_diagnostic'=> $a->is_diagnostic,
             ]);
 
-        return Inertia::render('Analytics/Index', [
+        return [
             'bandHistory'    => $bandHistory,
             'skillData'      => $skillData,
             'errorPatterns'  => $errorPatterns,
@@ -127,7 +138,6 @@ class AnalyticsController extends Controller
             'weeklySummary'  => $weeklySummary,
             'recentAttempts' => $recentAttempts,
             'target'         => $user->target_band,
-            'daysUntilExam'  => $user->daysUntilExam(),
-        ]);
+        ];
     }
 }
