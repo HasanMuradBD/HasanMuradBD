@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MicroSkillSeeder::class,
             DiagnosticTestSeeder::class,
+            PracticeReadingTestSeeder::class,
         ]);
     }
 }

@@ -60,3 +60,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', fn() => inertia('Profile/Index'))->name('profile.index');
     });
 });
+
+// Admin panel — requires auth + ADMIN_EMAILS env var
+Route::middleware(['auth', \App\Http\Middleware\RequireAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/',              [\App\Http\Controllers\Admin\AdminController::class, 'dashboard']) ->name('dashboard');
+    Route::get('/tests',         [\App\Http\Controllers\Admin\AdminController::class, 'tests'])     ->name('tests');
+    Route::get('/tests/{test}',  [\App\Http\Controllers\Admin\AdminController::class, 'testShow'])  ->name('tests.show');
+    Route::post('/tests/{test}/toggle', [\App\Http\Controllers\Admin\AdminController::class, 'toggleTest'])->name('tests.toggle');
+    Route::get('/questions',     [\App\Http\Controllers\Admin\AdminController::class, 'questions']) ->name('questions');
+    Route::get('/micro-skills',  [\App\Http\Controllers\Admin\AdminController::class, 'microSkills'])->name('micro-skills');
+    Route::get('/users',         [\App\Http\Controllers\Admin\AdminController::class, 'users'])     ->name('users');
+});
