@@ -1,9 +1,8 @@
 <?php
 namespace App\Jobs;
 
-use App\Models\StudyPlanDay;
 use App\Models\User;
-use App\Services\PlanGeneratorService;
+use App\Services\PlanRebalanceService;
 use App\Services\WhatsAppService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,7 +16,7 @@ class ProcessInboundWhatsApp implements ShouldQueue
 
     public function __construct(private readonly array $payload) {}
 
-    public function handle(WhatsAppService $whatsapp, PlanGeneratorService $planner): void
+    public function handle(WhatsAppService $whatsapp, PlanRebalanceService $rebalancer): void
     {
         $entry   = $this->payload['entry'][0] ?? null;
         $changes = $entry['changes'][0]['value'] ?? null;
@@ -34,22 +33,20 @@ class ProcessInboundWhatsApp implements ShouldQueue
         $plan = $user->activePlan;
 
         match(true) {
-            $body === 'MISSED'                          => $this->handleMissed($user, $plan, $whatsapp),
-            in_array($body, ['BUSY','TIRED','FORGOT','OTHER']) => $this->handleFriction($user, $body, $whatsapp),
-            $body === 'START'                           => $this->handleStart($user, $whatsapp),
-            preg_match('/^\d{1,2}(AM|PM|:\d{2})$/i', $body) => $this->handleTimePreference($user, $body, $whatsapp),
-            in_array($body, ['1','2','3'])              => $this->handleQuizAnswer($user, $body, $whatsapp),
-            default                                     => null,
+            $body === 'MISSED'                                   => $this->handleMissed($user, $plan, $whatsapp, $rebalancer),
+            in_array($body, ['BUSY','TIRED','FORGOT','OTHER'])   => $this->handleFriction($user, $body, $whatsapp),
+            $body === 'START'                                    => $this->handleStart($user, $whatsapp),
+            (bool) preg_match('/^\d{1,2}(AM|PM|:\d{2})$/i', $body) => $this->handleTimePreference($user, $body, $whatsapp),
+            in_array($body, ['1','2','3'])                       => $this->handleQuizAnswer($user, $body, $whatsapp),
+            default                                              => null,
         };
     }
 
-    private function handleMissed(User $user, $plan, WhatsAppService $whatsapp): void
+    private function handleMissed(User $user, $plan, WhatsAppService $whatsapp, PlanRebalanceService $rebalancer): void
     {
         if (!$plan) return;
 
-        // Mark today's day as missed and reschedule
-        $today = $plan->today();
-        $today?->update(['status' => 'missed', 'missed_reason' => 'user_reported']);
+        $rebalancer->rebalanceToday($plan);
 
         $whatsapp->sendText(
             $user->phone_e164,
