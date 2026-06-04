@@ -1,32 +1,56 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Route;
 
-// Auth
+// Stripe webhooks — no CSRF, no auth
+Route::post('/stripe/webhook', '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook')
+    ->name('cashier.webhook');
+
+// WhatsApp inbound webhook — no CSRF
+Route::get('/whatsapp/webhook', [\App\Http\Controllers\WhatsApp\InboundController::class, 'verify'])
+    ->name('whatsapp.verify');
+Route::post('/whatsapp/webhook', [\App\Http\Controllers\WhatsApp\InboundController::class, 'handle'])
+    ->name('whatsapp.inbound');
+
+// Auth views — Fortify handles the POST routes automatically
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [RegisterController::class, 'create'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store']);
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
-    Route::get('/forgot-password', fn() => redirect()->route('login'))->name('password.request');
+    // Fortify handles: GET /login, POST /login, GET /register, POST /register,
+    // GET /forgot-password, POST /forgot-password, GET /reset-password, POST /reset-password
 });
 
-Route::middleware('auth')->group(function () {
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+// Authenticated routes
+Route::middleware(['auth'])->group(function () {
+    // Email verification (Fortify handles POST /email/verification-notification)
+    Route::get('/email/verify', fn() => inertia('Auth/VerifyEmail', ['status' => session('status')]))
+        ->name('verification.notice');
 
-    // Subscription (accessible without active subscription)
+    // Subscription (accessible without active subscription — user may need to subscribe)
     Route::get('/subscribe', [SubscriptionController::class, 'index'])->name('subscription.index');
     Route::get('/subscribe/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::get('/billing/portal', [SubscriptionController::class, 'portal'])->name('subscription.portal');
 
-    // Protected routes — require active trial or subscription
-    Route::middleware(\App\Http\Middleware\EnforceSubscription::class)->group(function () {
+    // Protected platform routes — require active trial or subscription
+    Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/analytics', fn() => inertia('Analytics/Index'))->name('analytics.index');
+        Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
         Route::get('/tests', fn() => inertia('Exam/TestList'))->name('tests.index');
+
+        // Daily task completion
+        Route::patch('/daily-tasks/{task}/complete', [\App\Http\Controllers\DailyTaskController::class, 'complete'])
+            ->name('daily-tasks.complete');
+
+        // Test attempt lifecycle
+        Route::post('/test-attempts', [\App\Http\Controllers\TestAttemptController::class, 'store'])
+            ->name('test-attempts.start');
+        Route::post('/test-attempts/{attempt}/submit', [\App\Http\Controllers\TestAttemptController::class, 'submit'])
+            ->name('test-attempts.submit');
+        Route::get('/test-attempts/{attempt}/review', [\App\Http\Controllers\TestAttemptController::class, 'review'])
+            ->name('test-attempts.review');
+
+        // Profile
+        Route::get('/profile', fn() => inertia('Profile/Index'))->name('profile.index');
     });
 });
