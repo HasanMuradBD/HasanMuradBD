@@ -17,7 +17,7 @@ export default function SubscriptionIndex({ trialExpired, user }) {
             <div className="w-full max-w-lg">
                 {trialExpired && (
                     <div className="bg-red-500/20 border border-red-400 text-red-200 rounded-xl p-4 mb-6 text-center">
-                        <p className="font-semibold">Your 7-day free trial has ended.</p>
+                        <p className="font-semibold">Your 15-day free trial has ended.</p>
                         <p className="text-sm mt-1 text-red-300">Subscribe to keep your progress and continue your plan.</p>
                     </div>
                 )}

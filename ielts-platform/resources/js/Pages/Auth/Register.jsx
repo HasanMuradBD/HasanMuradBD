@@ -23,7 +23,7 @@ export default function Register() {
             <div className="w-full max-w-md">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-white">IELTS Master</h1>
-                    <p className="text-indigo-200 mt-2">Start your free 7-day trial. No credit card required.</p>
+                    <p className="text-indigo-200 mt-2">Start your free 15-day trial. No credit card required.</p>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8">

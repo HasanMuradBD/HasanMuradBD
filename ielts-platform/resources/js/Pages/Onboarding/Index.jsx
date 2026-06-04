@@ -86,7 +86,7 @@ export default function OnboardingIndex({ user, daysUntilExam, diagnosticTest })
                 </div>
 
                 <p className="text-center text-indigo-300 text-xs">
-                    Your 7-day free trial is active. No payment required today.
+                    Your 15-day free trial is active. No payment required today.
                 </p>
             </div>
         </div>

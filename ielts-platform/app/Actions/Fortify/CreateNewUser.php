@@ -36,7 +36,7 @@ class CreateNewUser implements CreatesNewUsers
             'target_band'       => $input['target_band'],
             'phone_e164'        => $input['phone_e164'] ?? null,
             'whatsapp_opted_in' => !empty($input['phone_e164']),
-            'trial_ends_at'     => now()->addDays(7),
+            'trial_ends_at'     => now()->addDays(15),
         ]);
     }
 }

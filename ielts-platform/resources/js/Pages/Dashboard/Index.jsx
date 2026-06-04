@@ -43,7 +43,7 @@ export default function Dashboard({ plan, todayTasks, bandHistory, weekStats, we
         <AppLayout>
             <Head title="Dashboard" />
 
-            {trialDaysLeft !== null && trialDaysLeft <= 3 && (
+            {trialDaysLeft !== null && trialDaysLeft <= 5 && (
                 <TrialBanner daysLeft={trialDaysLeft} />
             )}
 
