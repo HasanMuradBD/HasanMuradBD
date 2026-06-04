@@ -3,6 +3,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\SendWhatsAppMessage;
 use App\Models\User;
+use App\Services\ChallengeProfileService;
 use App\Services\WhatsAppCoachingScript;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -12,7 +13,7 @@ class DispatchWhatsAppMessages extends Command
     protected $signature   = 'whatsapp:dispatch {slot : morning|midday|evening}';
     protected $description = 'Dispatch scheduled WhatsApp coaching messages';
 
-    public function handle(WhatsAppCoachingScript $scripts): void
+    public function handle(WhatsAppCoachingScript $scripts, ChallengeProfileService $challenges): void
     {
         $slot = $this->argument('slot');
 
@@ -23,12 +24,15 @@ class DispatchWhatsAppMessages extends Command
             ->get();
 
         foreach ($users as $user) {
-            $plan    = $user->activePlan;
-            $today   = $plan?->days->first();
-            $dayNum  = $plan?->currentDayNumber() ?? 1;
+            $plan      = $user->activePlan;
+            $today     = $plan?->days->first();
+            $dayNum    = $plan?->currentDayNumber() ?? 1;
+            $topCauses = Cache::remember("top_causes_{$user->id}", 86400,
+                fn() => $challenges->topCauses($user, 3)
+            );
 
             match($slot) {
-                'morning' => $this->sendMorning($user, $today, $dayNum, $plan, $scripts),
+                'morning' => $this->sendMorning($user, $today, $dayNum, $plan, $scripts, $topCauses),
                 'midday'  => $this->sendMidday($user, $today, $dayNum, $scripts),
                 'evening' => $this->sendEvening($user, $today, $dayNum),
                 default   => null,
@@ -38,16 +42,17 @@ class DispatchWhatsAppMessages extends Command
         $this->info("WhatsApp {$slot} messages dispatched to {$users->count()} users.");
     }
 
-    private function sendMorning(User $user, $today, int $dayNum, $plan, WhatsAppCoachingScript $scripts): void
+    private function sendMorning(User $user, $today, int $dayNum, $plan, WhatsAppCoachingScript $scripts, array $topCauses = []): void
     {
         if (!$today) return;
 
-        $name       = explode(' ', $user->name)[0];
-        $theme      = $today->focus_theme ?? 'General Practice';
-        $mins       = $today->estimated_minutes;
-        $daysLeft   = $user->daysUntilExam();
-        $tip        = $scripts->getMorningTip($dayNum);
-        $milestone  = $scripts->getMilestone($dayNum, $plan->total_days);
+        $name      = explode(' ', $user->name)[0];
+        $theme     = $today->focus_theme ?? 'General Practice';
+        $mins      = $today->estimated_minutes;
+        $daysLeft  = $user->daysUntilExam();
+        $tip       = $scripts->getMorningTip($dayNum);
+        $milestone = $scripts->getMilestone($dayNum, $plan->total_days);
+        $nudge     = $scripts->getChallengeNudge($dayNum, $topCauses);
 
         $body = "Good morning, {$name}! 🎯\n\n";
 
@@ -67,6 +72,11 @@ class DispatchWhatsAppMessages extends Command
               .  "━━━━━━━━━━━━━━━━━━━\n\n";
 
         $body .= "💡 {$tip}\n\n";
+
+        if ($nudge) {
+            $body .= "{$nudge}\n\n";
+        }
+
         $body .= "Reply START to begin, or tell me a time (e.g. 7pm) to get a reminder then.\n\n";
         $body .= "👉 " . config('app.url');
 

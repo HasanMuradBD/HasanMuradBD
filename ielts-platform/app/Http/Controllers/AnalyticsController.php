@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Services\ChallengeProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -129,15 +130,18 @@ class AnalyticsController extends Controller
                 'is_diagnostic'=> $a->is_diagnostic,
             ]);
 
+        $challengeProfile = app(ChallengeProfileService::class)->buildProfile($user);
+
         return [
-            'bandHistory'    => $bandHistory,
-            'skillData'      => $skillData,
-            'errorPatterns'  => $errorPatterns,
-            'moduleBands'    => $moduleBands,
-            'moduleTargets'  => $moduleTargets,
-            'weeklySummary'  => $weeklySummary,
-            'recentAttempts' => $recentAttempts,
-            'target'         => $user->target_band,
+            'bandHistory'      => $bandHistory,
+            'skillData'        => $skillData,
+            'errorPatterns'    => $errorPatterns,
+            'moduleBands'      => $moduleBands,
+            'moduleTargets'    => $moduleTargets,
+            'weeklySummary'    => $weeklySummary,
+            'recentAttempts'   => $recentAttempts,
+            'challengeProfile' => $challengeProfile,
+            'target'           => $user->target_band,
         ];
     }
 }

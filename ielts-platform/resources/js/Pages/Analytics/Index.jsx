@@ -6,11 +6,12 @@ import ErrorPatternChart from '@/Components/ErrorPatternChart';
 import ModuleGapCards from '@/Components/ModuleGapCards';
 import WeeklySummaryCard from '@/Components/WeeklySummaryCard';
 import RecentAttempts from '@/Components/RecentAttempts';
+import ChallengeProfile from '@/Components/ChallengeProfile';
 
 export default function AnalyticsIndex({
     bandHistory, skillData, errorPatterns,
     moduleBands, moduleTargets, weeklySummary,
-    recentAttempts, target, daysUntilExam,
+    recentAttempts, challengeProfile, target, daysUntilExam,
 }) {
     return (
         <AppLayout>
@@ -29,6 +30,9 @@ export default function AnalyticsIndex({
 
                 {/* Weekly summary stats */}
                 <WeeklySummaryCard summary={weeklySummary} />
+
+                {/* Challenge profile — 6 root causes */}
+                <ChallengeProfile profile={challengeProfile} />
 
                 {/* Module gap cards */}
                 <div>

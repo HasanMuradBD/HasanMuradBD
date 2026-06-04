@@ -109,6 +109,28 @@ class WhatsAppCoachingScript
         return $tip;
     }
 
+    /**
+     * Returns a challenge-specific tip overlay if the user has an active cause.
+     * Called every 3rd day to surface targeted advice based on their actual data.
+     */
+    public function getChallengeNudge(int $dayNum, array $topCauses): ?string
+    {
+        if (empty($topCauses) || $dayNum % 3 !== 0) return null;
+
+        // Rotate through top causes based on day
+        $cause = $topCauses[($dayNum / 3 - 1) % count($topCauses)];
+
+        return match($cause) {
+            'cause_vocabulary'    => "📖 *Your vocab data:* You're losing marks on paraphrasing. Today, after your drill, write 5 collocations from the passage in new sentences.",
+            'cause_grammar'       => "✏️ *Your grammar data:* Your responses show tense inconsistency. Review your written output today specifically for that — one structure at a time.",
+            'cause_exposure'      => "🎧 *Your listening data:* Unfamiliar accents are slowing you down. Tonight, listen to 10 minutes of BBC Radio 4 — just for exposure, no pressure.",
+            'cause_timed'         => "⏱️ *Your timing data:* You're spending too long per question. Today, set a 90-second timer per Reading question and commit.",
+            'cause_memorised'     => "🧠 *Your speaking data:* Your answers are sounding scripted. Practise answering 3 questions you've never prepared for — raw and real.",
+            'cause_question_type' => "📋 *Your accuracy data:* Question type errors are costing you. Before today's drill, re-read the examiner instructions for your weakest type.",
+            default               => null,
+        };
+    }
+
     public function hasQuiz(int $dayNum): bool
     {
         return in_array($dayNum, self::QUIZ_DAYS);
