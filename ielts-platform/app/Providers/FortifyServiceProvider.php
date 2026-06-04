@@ -36,7 +36,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::verifyEmailView(fn() => Inertia::render('Auth/VerifyEmail', ['status' => session('status')]));
 
         Fortify::redirects('login', '/');
-        Fortify::redirects('register', '/');
+        Fortify::redirects('register', '/onboarding');
         Fortify::redirects('logout', '/login');
 
         RateLimiter::for('login', function (Request $request) {

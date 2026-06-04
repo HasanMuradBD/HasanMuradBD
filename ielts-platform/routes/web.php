@@ -32,6 +32,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/subscribe/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::get('/billing/portal', [SubscriptionController::class, 'portal'])->name('subscription.portal');
 
+    // Onboarding — accessible before plan exists, but after auth+subscription
+    Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
+        Route::get('/onboarding', [\App\Http\Controllers\OnboardingController::class, 'show'])->name('onboarding');
+        Route::post('/onboarding/skip', [\App\Http\Controllers\OnboardingController::class, 'skip'])->name('onboarding.skip');
+    });
+
     // Protected platform routes — require active trial or subscription
     Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

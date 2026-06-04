@@ -9,6 +9,11 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+
+        if (!$user->onboarding_completed_at) {
+            return redirect()->route('onboarding');
+        }
+
         $plan = $user->activePlan;
         $todayTasks = [];
         $planData = null;

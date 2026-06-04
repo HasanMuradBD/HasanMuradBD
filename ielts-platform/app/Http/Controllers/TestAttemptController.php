@@ -28,7 +28,9 @@ class TestAttemptController extends Controller
             'status'        => 'in_progress',
         ]);
 
-        $test = $attempt->test()->with('questions')->first();
+        $test = $attempt->test()
+            ->with(['questions' => fn($q) => $q->orderBy('sequence'), 'writingPrompts', 'speakingPrompts'])
+            ->first();
 
         return Inertia::render('Exam/Attempt', [
             'attempt'  => $attempt,
@@ -78,8 +80,15 @@ class TestAttemptController extends Controller
         // Calculate and store bands
         app(BandCalculatorService::class)->calculate($attempt);
 
-        // Refresh skill snapshots asynchronously
+        // Refresh skill snapshots
         app(SkillSnapshotService::class)->refreshForUser($attempt->user_id);
+
+        // If this was the diagnostic, auto-generate the study plan and complete onboarding
+        if ($attempt->is_diagnostic) {
+            $user = $request->user()->fresh();
+            app(\App\Services\PlanGeneratorService::class)->generateFromDiagnostic($user, $attempt->fresh());
+            $user->update(['onboarding_completed_at' => now()]);
+        }
 
         return redirect()->route('test-attempts.review', $attempt);
     }
