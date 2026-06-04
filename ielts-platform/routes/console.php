@@ -12,3 +12,6 @@ Schedule::command('plans:detect-missed')->dailyAt('00:05')->timezone('UTC');
 
 // Materialise skill snapshots nightly (runs after missed-day detection)
 Schedule::command('analytics:refresh-snapshots')->dailyAt('00:30')->timezone('UTC');
+
+// Weekly progress report via WhatsApp (Sunday 07:00 UTC)
+Schedule::command('whatsapp:weekly-report')->weeklyOn(0, '07:00')->timezone('UTC');
