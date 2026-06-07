@@ -9,8 +9,7 @@ class DailyTaskController extends Controller
 {
     public function complete(Request $request, DailyTask $task)
     {
-        // Ensure task belongs to authenticated user's plan
-        $this->authorize('update', $task);
+        abort_if($task->day->plan->user_id !== $request->user()->id, 403);
 
         $task->update(['status' => 'completed', 'completed_at' => now()]);
 

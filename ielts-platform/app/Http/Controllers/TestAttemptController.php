@@ -43,7 +43,7 @@ class TestAttemptController extends Controller
 
     public function submit(Request $request, TestAttempt $attempt)
     {
-        $this->authorize('update', $attempt);
+        abort_if($attempt->user_id !== $request->user()->id, 403);
 
         if ($attempt->status !== 'in_progress') {
             return back()->withErrors(['attempt' => 'This attempt is already submitted.']);
