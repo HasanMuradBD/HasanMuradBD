@@ -22,7 +22,13 @@ export default function Attempt({ attempt, test, duration }) {
         return acc;
     }, {});
 
-    const modules = Object.keys(byModule);
+    // Writing/Speaking tests have no questions — derive modules from test.module directly
+    const modules = Object.keys(byModule).length > 0
+        ? Object.keys(byModule)
+        : (test.module === 'full'
+            ? ['reading', 'listening', 'writing', 'speaking']
+            : [test.module].filter(Boolean));
+
     const activeModule = modules[currentSection - 1] ?? modules[0];
     const questions = byModule[activeModule] ?? [];
 

@@ -2,6 +2,7 @@ import { Head, usePage } from '@inertiajs/react';
 import AppLayout from '@/Components/AppLayout';
 import DailyMissionCard from '@/Components/DailyMissionCard';
 import BandTrajectoryChart from '@/Components/BandTrajectoryChart';
+import DailyTipCard from '@/Components/DailyTipCard';
 import TrialBanner from '@/Components/TrialBanner';
 import WeekStatsBar from '@/Components/WeekStatsBar';
 import WeakSkillsPanel from '@/Components/WeakSkillsPanel';
@@ -34,7 +35,7 @@ function PlanProgress({ plan }) {
     );
 }
 
-export default function Dashboard({ plan, todayTasks, bandHistory, weekStats, weakSkills, trialDaysLeft, daysUntilExam }) {
+export default function Dashboard({ plan, todayTasks, bandHistory, weekStats, weakSkills, trialDaysLeft, daysUntilExam, dailyTip }) {
     const { auth } = usePage().props;
     const hour = new Date().getHours();
     const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
@@ -70,6 +71,7 @@ export default function Dashboard({ plan, todayTasks, bandHistory, weekStats, we
 
                     {/* Right column — sidebar */}
                     <div className="space-y-6">
+                        <DailyTipCard tip={dailyTip} />
                         <WeakSkillsPanel weakSkills={weakSkills} />
                         <UpcomingDays upcoming={plan?.upcoming} />
 

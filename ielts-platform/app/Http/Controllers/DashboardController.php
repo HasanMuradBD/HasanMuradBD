@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\DailyTip;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -101,6 +102,7 @@ class DashboardController extends Controller
             'weakSkills'    => $weakSkills,
             'trialDaysLeft' => $user->isOnTrial() ? $user->trialDaysLeft() : null,
             'daysUntilExam' => $user->daysUntilExam(),
+            'dailyTip'      => DailyTip::forToday(),
         ]);
     }
 }

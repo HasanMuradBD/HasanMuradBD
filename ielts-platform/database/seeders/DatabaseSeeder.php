@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             MicroSkillSeeder::class,
             DiagnosticTestSeeder::class,
             PracticeReadingTestSeeder::class,
+            DailyTipSeeder::class,
         ]);
     }
 }
