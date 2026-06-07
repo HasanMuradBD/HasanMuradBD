@@ -49,7 +49,7 @@ TEXT;
         $this->seedSpeakingPrompts($test);
 
         // ── Module-practice placeholder test (needed by PlanGeneratorService) ───
-        Test::firstOrCreate(
+        $drill = Test::firstOrCreate(
             ['type' => 'module_practice', 'title' => 'Reading Practice Drill'],
             [
                 'type'             => 'module_practice',
@@ -57,8 +57,10 @@ TEXT;
                 'duration_minutes' => 20,
                 'total_questions'  => 13,
                 'is_active'        => true,
+                'academic_or_general' => 'academic',
             ]
         );
+        $this->seedReadingDrillQuestions($drill);
 
         // ── Full mock placeholder ────────────────────────────────────────────────
         Test::firstOrCreate(
@@ -257,6 +259,78 @@ TEXT;
                 'band_7_model_answer' => 'The debate over whether higher education should prioritise theoretical knowledge or practical skills is one that has intensified as graduate employment rates have come under scrutiny. Both positions have considerable merit, and a balanced approach is arguably the most defensible. Advocates of the academic model argue that universities are uniquely positioned to foster critical thinking, analytical reasoning, and intellectual curiosity — qualities that no vocational training can replicate. A philosophy or history graduate, for instance, develops the capacity to evaluate complex arguments, a skill that proves valuable across numerous professional contexts. Moreover, foundational theoretical knowledge in fields such as medicine or engineering underpins the safe application of any practical technique. On the other hand, employers frequently report that graduates lack the practical competencies required from day one of employment. Communication, project management, data analysis, and professional conduct are skills that classroom study rarely develops adequately. Universities that incorporate internships, live projects, and industry partnerships demonstrably improve graduate employability outcomes. In my view, these two objectives are not mutually exclusive. The most effective universities integrate theoretical rigour with structured practical experience — delivering graduates who can both think independently and perform competently. Treating them as competing priorities is a false dichotomy that serves neither students nor the societies that fund higher education.',
             ]
         );
+    }
+
+    private function seedReadingDrillQuestions(Test $drill): void
+    {
+        if ($drill->questions()->exists()) return;
+
+        $tfng     = MicroSkill::where('slug', 'reading_tfng')->first();
+        $headings = MicroSkill::where('slug', 'reading_matching_headings')->first();
+        $skimming = MicroSkill::where('slug', 'reading_skimming')->first();
+        $scanning = MicroSkill::where('slug', 'reading_scanning')->first();
+
+        // Reuse the Andes passage — compact 13-question drill
+        $passage = self::PASSAGE;
+
+        $headingOptions = "i. The long-term consequences of neglect and the modern restoration effort\nii. A layered construction process designed to enrich barren highland soil\niii. Evidence that ancient farmers conducted systematic crop experimentation\niv. Why the andenes were originally built on such difficult terrain\nv. A passive water management system that functioned across two seasons\nvi. How a single site revealed an unexpected capacity to manufacture climate\nvii. The superiority of physical evidence over written documentation\nviii. Statistical proof that restored terraces remain agriculturally viable";
+
+        $matchingHeadings = [
+            [1, 1, 'matching_headings', "Choose the correct heading for Paragraph B.\n\n{$headingOptions}", 'ii',  'medium'],
+            [2, 1, 'matching_headings', "Choose the correct heading for Paragraph C.\n\n{$headingOptions}", 'v',   'medium'],
+            [3, 1, 'matching_headings', "Choose the correct heading for Paragraph D.\n\n{$headingOptions}", 'vi',  'hard'],
+            [4, 1, 'matching_headings', "Choose the correct heading for Paragraph E.\n\n{$headingOptions}", 'iii', 'medium'],
+            [5, 1, 'matching_headings', "Choose the correct heading for Paragraph F.\n\n{$headingOptions}", 'i',   'hard'],
+            [6, 1, 'matching_headings', "Choose the correct heading for Paragraph G.\n\n{$headingOptions}", 'vii', 'medium'],
+        ];
+
+        $tfngQuestions = [
+            [7,  2, 'true_false_not_given', 'The stone retaining walls of the andenes were built without any binding material.',                                              'TRUE'],
+            [8,  2, 'true_false_not_given', 'The drainage layers within each terrace could retain moisture during dry periods without human involvement.',                   'TRUE'],
+            [9,  2, 'true_false_not_given', 'Moray was the only concentric-terrace site discovered in the Andean region.',                                                  'NOT GIVEN'],
+            [10, 2, 'true_false_not_given', 'The temperature difference recorded at Moray can also be found in natural bowl-shaped landforms of comparable size.',          'FALSE'],
+            [11, 2, 'true_false_not_given', 'Colonial administrators made significant efforts to maintain the andenes after the Spanish conquest.',                          'FALSE'],
+            [12, 2, 'true_false_not_given', 'Crop yields on restored andenes in the Colca Valley exceed those on unmodified hillside land.',                                'TRUE'],
+            [13, 2, 'true_false_not_given', 'Modern precision agriculture uses identical techniques to those developed by Andean engineers.',                                'NOT GIVEN'],
+        ];
+
+        foreach ($matchingHeadings as [$seq, $section, $type, $qtext, $answer, $difficulty]) {
+            $q = Question::firstOrCreate(
+                ['test_id' => $drill->id, 'sequence' => $seq],
+                [
+                    'test_id'           => $drill->id,
+                    'module'            => 'reading',
+                    'section_number'    => $section,
+                    'sequence'          => $seq,
+                    'question_type'     => $type,
+                    'question_text'     => $qtext,
+                    'passage_reference' => $passage,
+                    'correct_answer'    => $answer,
+                    'answer_explanation'=> "See passage paragraphs for the matching heading.",
+                    'difficulty'        => $difficulty,
+                ]
+            );
+            $q->microSkills()->syncWithoutDetaching(array_filter([$headings?->id, $skimming?->id]));
+        }
+
+        foreach ($tfngQuestions as [$seq, $section, $type, $qtext, $answer]) {
+            $q = Question::firstOrCreate(
+                ['test_id' => $drill->id, 'sequence' => $seq],
+                [
+                    'test_id'           => $drill->id,
+                    'module'            => 'reading',
+                    'section_number'    => $section,
+                    'sequence'          => $seq,
+                    'question_type'     => $type,
+                    'question_text'     => $qtext,
+                    'passage_reference' => $passage,
+                    'correct_answer'    => $answer,
+                    'answer_explanation'=> "Refer to the passage for evidence.",
+                    'difficulty'        => 'medium',
+                ]
+            );
+            $q->microSkills()->syncWithoutDetaching(array_filter([$tfng?->id, $scanning?->id]));
+        }
     }
 
     private function seedSpeakingPrompts(Test $test): void
