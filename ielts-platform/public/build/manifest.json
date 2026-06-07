@@ -1,0 +1,225 @@
+{
+  "_AppLayout-B1KLraFW.js": {
+    "file": "assets/AppLayout-B1KLraFW.js",
+    "name": "AppLayout",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_BandTrajectoryChart-YDAw8osl.js": {
+    "file": "assets/BandTrajectoryChart-YDAw8osl.js",
+    "name": "BandTrajectoryChart",
+    "imports": [
+      "resources/js/app.jsx",
+      "_with-selector-dU7O1TR4.js"
+    ]
+  },
+  "_with-selector-dU7O1TR4.js": {
+    "file": "assets/with-selector-dU7O1TR4.js",
+    "name": "with-selector",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BfWYVzAk.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/Pages/Admin/Dashboard.jsx": {
+    "file": "assets/Dashboard-B_7x-HPV.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/Admin/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Admin/MicroSkills.jsx": {
+    "file": "assets/MicroSkills-CyjsXtzd.js",
+    "name": "MicroSkills",
+    "src": "resources/js/Pages/Admin/MicroSkills.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Admin/TestShow.jsx": {
+    "file": "assets/TestShow-B1_sznWK.js",
+    "name": "TestShow",
+    "src": "resources/js/Pages/Admin/TestShow.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Tests.jsx": {
+    "file": "assets/Tests-3sVkiVOg.js",
+    "name": "Tests",
+    "src": "resources/js/Pages/Admin/Tests.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Users.jsx": {
+    "file": "assets/Users-C1Gj0kWm.js",
+    "name": "Users",
+    "src": "resources/js/Pages/Admin/Users.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Analytics/Index.jsx": {
+    "file": "assets/Index-Buodoag9.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Analytics/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_BandTrajectoryChart-YDAw8osl.js",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ForgotPassword.jsx": {
+    "file": "assets/ForgotPassword-CiY9NhjA.js",
+    "name": "ForgotPassword",
+    "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-BDLfAS_1.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/Register.jsx": {
+    "file": "assets/Register-DbZN8nhN.js",
+    "name": "Register",
+    "src": "resources/js/Pages/Auth/Register.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/ResetPassword.jsx": {
+    "file": "assets/ResetPassword-Bn-vVnda.js",
+    "name": "ResetPassword",
+    "src": "resources/js/Pages/Auth/ResetPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/VerifyEmail.jsx": {
+    "file": "assets/VerifyEmail-CyjXu2zX.js",
+    "name": "VerifyEmail",
+    "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Dashboard/Index.jsx": {
+    "file": "assets/Index-BaCATLBJ.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Dashboard/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_BandTrajectoryChart-YDAw8osl.js",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Error.jsx": {
+    "file": "assets/Error-CAVy2l7i.js",
+    "name": "Error",
+    "src": "resources/js/Pages/Error.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Exam/Attempt.jsx": {
+    "file": "assets/Attempt-YLzspE6D.js",
+    "name": "Attempt",
+    "src": "resources/js/Pages/Exam/Attempt.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_with-selector-dU7O1TR4.js"
+    ]
+  },
+  "resources/js/Pages/Exam/Review.jsx": {
+    "file": "assets/Review-Dod672qT.js",
+    "name": "Review",
+    "src": "resources/js/Pages/Exam/Review.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-B1KLraFW.js"
+    ]
+  },
+  "resources/js/Pages/Onboarding/Index.jsx": {
+    "file": "assets/Index-D3IfAlSs.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Onboarding/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Subscription/Index.jsx": {
+    "file": "assets/Index-B1FC8Q-h.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Subscription/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-DWFO8O9D.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Admin/Dashboard.jsx",
+      "resources/js/Pages/Admin/MicroSkills.jsx",
+      "resources/js/Pages/Admin/TestShow.jsx",
+      "resources/js/Pages/Admin/Tests.jsx",
+      "resources/js/Pages/Admin/Users.jsx",
+      "resources/js/Pages/Analytics/Index.jsx",
+      "resources/js/Pages/Auth/ForgotPassword.jsx",
+      "resources/js/Pages/Auth/Login.jsx",
+      "resources/js/Pages/Auth/Register.jsx",
+      "resources/js/Pages/Auth/ResetPassword.jsx",
+      "resources/js/Pages/Auth/VerifyEmail.jsx",
+      "resources/js/Pages/Dashboard/Index.jsx",
+      "resources/js/Pages/Error.jsx",
+      "resources/js/Pages/Exam/Attempt.jsx",
+      "resources/js/Pages/Exam/Review.jsx",
+      "resources/js/Pages/Onboarding/Index.jsx",
+      "resources/js/Pages/Subscription/Index.jsx"
+    ],
+    "css": [
+      "assets/app-BfWYVzAk.css"
+    ]
+  }
+}
