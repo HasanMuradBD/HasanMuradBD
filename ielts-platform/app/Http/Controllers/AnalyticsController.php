@@ -13,8 +13,12 @@ class AnalyticsController extends Controller
     {
         $user = $request->user();
 
-        // Cache per user for 1 hour; busted on new test submission
-        $cached = Cache::remember("analytics_{$user->id}", 3600, fn() => $this->buildAnalytics($user));
+        try {
+            $cached = Cache::remember("analytics_{$user->id}", 3600, fn() => $this->buildAnalytics($user));
+        } catch (\Throwable $e) {
+            Cache::forget("analytics_{$user->id}");
+            $cached = $this->emptyAnalytics($user);
+        }
 
         return Inertia::render('Analytics/Index', array_merge($cached, [
             'daysUntilExam' => $user->daysUntilExam(),
@@ -23,23 +27,22 @@ class AnalyticsController extends Controller
 
     private function buildAnalytics($user): array
     {
-        // Per-module band history (chronological, all completed attempts)
         $bandHistory = $user->testAttempts()
             ->with('sections')
             ->where('status', 'completed')
+            ->whereNotNull('submitted_at')
             ->orderBy('submitted_at')
             ->get()
             ->map(fn($a) => [
                 'day'       => (int) $user->created_at->diffInDays($a->submitted_at) + 1,
                 'date'      => $a->submitted_at->format('M j'),
-                'overall'   => (float) $a->overall_band,
-                'reading'   => (float) optional($a->sections->firstWhere('module', 'reading'))->band_score,
-                'listening' => (float) optional($a->sections->firstWhere('module', 'listening'))->band_score,
-                'writing'   => (float) optional($a->sections->firstWhere('module', 'writing'))->band_score,
-                'speaking'  => (float) optional($a->sections->firstWhere('module', 'speaking'))->band_score,
+                'overall'   => $a->overall_band ? (float) $a->overall_band : null,
+                'reading'   => ($s = $a->sections->firstWhere('module', 'reading'))  ? (float) $s->band_score : null,
+                'listening' => ($s = $a->sections->firstWhere('module', 'listening'))? (float) $s->band_score : null,
+                'writing'   => ($s = $a->sections->firstWhere('module', 'writing'))  ? (float) $s->band_score : null,
+                'speaking'  => ($s = $a->sections->firstWhere('module', 'speaking')) ? (float) $s->band_score : null,
             ]);
 
-        // Latest band per module (for gap cards)
         $latest = $bandHistory->last();
         $moduleBands = $latest ? [
             'reading'   => $latest['reading'],
@@ -48,7 +51,6 @@ class AnalyticsController extends Controller
             'speaking'  => $latest['speaking'],
         ] : [];
 
-        // Per-module target gaps
         $moduleTargets = [
             'reading'   => $user->target_band_reading   ?? $user->target_band,
             'listening' => $user->target_band_listening ?? $user->target_band,
@@ -56,81 +58,85 @@ class AnalyticsController extends Controller
             'speaking'  => $user->target_band_speaking  ?? $user->target_band,
         ];
 
-        // Micro-skill accuracy snapshots (last 30 days)
-        $skillData = $user->skillSnapshots()
-            ->with('microSkill')
-            ->where('snapshot_date', '>=', now()->subDays(30))
-            ->orderBy('snapshot_date')
-            ->get()
-            ->groupBy('micro_skill_id')
-            ->map(fn($snaps) => [
-                'skill'    => $snaps->first()->microSkill->name,
-                'module'   => $snaps->first()->microSkill->module,
-                'accuracy' => round($snaps->avg('accuracy_pct'), 1),
-                'band'     => $snaps->last()->estimated_band,
-                'trend'    => round($snaps->last()->accuracy_pct - $snaps->first()->accuracy_pct, 1),
-            ])
-            ->values();
+        $skillData = collect();
+        try {
+            $skillData = $user->skillSnapshots()
+                ->with('microSkill')
+                ->where('snapshot_date', '>=', now()->subDays(30))
+                ->orderBy('snapshot_date')
+                ->get()
+                ->filter(fn($s) => $s->microSkill !== null)
+                ->groupBy('micro_skill_id')
+                ->map(fn($snaps) => [
+                    'skill'    => $snaps->first()->microSkill->name,
+                    'module'   => $snaps->first()->microSkill->module,
+                    'accuracy' => round($snaps->avg('accuracy_pct'), 1),
+                    'band'     => $snaps->last()->estimated_band,
+                    'trend'    => round($snaps->last()->accuracy_pct - $snaps->first()->accuracy_pct, 1),
+                ])
+                ->values();
+        } catch (\Throwable) {}
 
-        // Error pattern aggregation (last 30 days, exclude nulls)
         $attemptIds = $user->testAttempts()
             ->where('status', 'completed')
+            ->whereNotNull('submitted_at')
             ->where('submitted_at', '>=', now()->subDays(30))
             ->pluck('id');
 
-        $errorPatterns = DB::table('test_responses')
-            ->whereIn('test_attempt_id', $attemptIds)
-            ->whereNotNull('error_tag')
-            ->where('is_correct', false)
-            ->select('error_tag', DB::raw('count(*) as count'))
-            ->groupBy('error_tag')
-            ->orderByDesc('count')
-            ->limit(10)
-            ->get()
-            ->map(fn($r) => ['tag' => $r->error_tag, 'count' => $r->count]);
+        $errorPatterns = collect();
+        try {
+            $errorPatterns = DB::table('test_responses')
+                ->whereIn('test_attempt_id', $attemptIds)
+                ->whereNotNull('error_tag')
+                ->where('is_correct', false)
+                ->select('error_tag', DB::raw('count(*) as count'))
+                ->groupBy('error_tag')
+                ->orderByDesc('count')
+                ->limit(10)
+                ->get()
+                ->map(fn($r) => ['tag' => $r->error_tag, 'count' => $r->count]);
+        } catch (\Throwable) {}
 
-        // Weekly summary (last 7 days: attempts, avg band, questions answered)
         $weeklyAttempts = $user->testAttempts()
             ->with('sections')
             ->where('status', 'completed')
+            ->whereNotNull('submitted_at')
             ->where('submitted_at', '>=', now()->subDays(6)->startOfDay())
             ->orderBy('submitted_at')
             ->get();
 
+        $weekIds = $weeklyAttempts->pluck('id');
+        $totalQ   = DB::table('test_responses')->whereIn('test_attempt_id', $weekIds)->count();
+        $correctQ = DB::table('test_responses')->whereIn('test_attempt_id', $weekIds)->where('is_correct', true)->count();
+
         $weeklySummary = [
             'attempts'           => $weeklyAttempts->count(),
-            'avg_band'           => $weeklyAttempts->count()
-                ? round($weeklyAttempts->avg('overall_band'), 1)
-                : null,
-            'questions_answered' => DB::table('test_responses')
-                ->whereIn('test_attempt_id', $weeklyAttempts->pluck('id'))
-                ->count(),
-            'accuracy'           => (function() use ($weeklyAttempts) {
-                $ids = $weeklyAttempts->pluck('id');
-                $total   = DB::table('test_responses')->whereIn('test_attempt_id', $ids)->count();
-                $correct = DB::table('test_responses')->whereIn('test_attempt_id', $ids)->where('is_correct', true)->count();
-                return $total > 0 ? round(($correct / $total) * 100, 1) : null;
-            })(),
+            'avg_band'           => $weeklyAttempts->count() ? round($weeklyAttempts->avg('overall_band'), 1) : null,
+            'questions_answered' => $totalQ,
+            'accuracy'           => $totalQ > 0 ? round(($correctQ / $totalQ) * 100, 1) : null,
         ];
 
-        // Recent attempts (last 10)
         $recentAttempts = $user->testAttempts()
-            ->with(['test', 'sections'])
+            ->with(['test:id,title,module', 'sections:id,test_attempt_id,module,band_score'])
             ->whereIn('status', ['completed', 'timed_out'])
+            ->whereNotNull('submitted_at')
             ->orderByDesc('submitted_at')
             ->limit(10)
             ->get()
             ->map(fn($a) => [
-                'id'           => $a->id,
-                'test_title'   => $a->test->title,
-                'module'       => $a->test->module,
-                'submitted_at' => $a->submitted_at->format('M j, Y'),
-                'overall_band' => $a->overall_band,
-                'status'       => $a->status,
-                'is_diagnostic'=> $a->is_diagnostic,
+                'id'            => $a->id,
+                'test_title'    => $a->test->title ?? '—',
+                'module'        => $a->test->module ?? null,
+                'submitted_at'  => $a->submitted_at->format('M j, Y'),
+                'overall_band'  => $a->overall_band,
+                'status'        => $a->status,
+                'is_diagnostic' => $a->is_diagnostic,
             ]);
 
-        $challengeProfile = app(ChallengeProfileService::class)->buildProfile($user);
+        $challengeProfile = [];
+        try {
+            $challengeProfile = app(ChallengeProfileService::class)->buildProfile($user);
+        } catch (\Throwable) {}
 
         return [
             'bandHistory'      => $bandHistory,
@@ -141,6 +147,26 @@ class AnalyticsController extends Controller
             'weeklySummary'    => $weeklySummary,
             'recentAttempts'   => $recentAttempts,
             'challengeProfile' => $challengeProfile,
+            'target'           => $user->target_band,
+        ];
+    }
+
+    private function emptyAnalytics($user): array
+    {
+        return [
+            'bandHistory'      => collect(),
+            'skillData'        => collect(),
+            'errorPatterns'    => collect(),
+            'moduleBands'      => [],
+            'moduleTargets'    => [
+                'reading'   => $user->target_band,
+                'listening' => $user->target_band,
+                'writing'   => $user->target_band,
+                'speaking'  => $user->target_band,
+            ],
+            'weeklySummary'    => ['attempts' => 0, 'avg_band' => null, 'questions_answered' => 0, 'accuracy' => null],
+            'recentAttempts'   => collect(),
+            'challengeProfile' => [],
             'target'           => $user->target_band,
         ];
     }

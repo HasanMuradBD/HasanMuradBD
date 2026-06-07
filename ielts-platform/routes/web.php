@@ -50,7 +50,14 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
-        Route::get('/tests', fn() => inertia('Exam/TestList'))->name('tests.index');
+        Route::get('/tests', function () {
+            $tests = \App\Models\Test::where('is_active', true)
+                ->withCount('questions')
+                ->orderBy('module')
+                ->orderBy('type')
+                ->get(['id', 'title', 'type', 'module', 'academic_or_general', 'duration_minutes', 'total_questions']);
+            return inertia('Exam/TestList', ['tests' => $tests]);
+        })->name('tests.index');
 
         // Daily task completion
         Route::patch('/daily-tasks/{task}/complete', [\App\Http\Controllers\DailyTaskController::class, 'complete'])

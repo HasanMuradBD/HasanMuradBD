@@ -38,8 +38,12 @@ class TestAttemptController extends Controller
         abort_if($attempt->user_id !== $request->user()->id, 403);
 
         $test = $attempt->test()
-            ->with(['questions' => fn($q) => $q->orderBy('sequence'), 'writingPrompts', 'speakingPrompts'])
-            ->first();
+            ->with([
+                'questions'       => fn($q) => $q->with('microSkills')->orderBy('sequence'),
+                'writingPrompts'  => fn($q) => $q->orderBy('task_number'),
+                'speakingPrompts' => fn($q) => $q->orderBy('part_number'),
+            ])
+            ->firstOrFail();
 
         return Inertia::render('Exam/Attempt', [
             'attempt'  => $attempt,
@@ -117,9 +121,13 @@ class TestAttemptController extends Controller
 
     public function review(Request $request, TestAttempt $attempt)
     {
-        $this->authorize('view', $attempt);
+        abort_if($attempt->user_id !== $request->user()->id, 403);
 
-        $attempt->load(['test', 'sections', 'responses.question.microSkills']);
+        $attempt->load([
+            'test:id,title,module,type,duration_minutes',
+            'sections',
+            'responses' => fn($q) => $q->with('question.microSkills')->orderBy('question_id'),
+        ]);
 
         return Inertia::render('Exam/Review', [
             'attempt' => $attempt,
