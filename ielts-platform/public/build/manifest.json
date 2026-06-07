@@ -1,28 +1,28 @@
 {
-  "_AppLayout-Cew5_y_W.js": {
-    "file": "assets/AppLayout-Cew5_y_W.js",
+  "_AppLayout-N0wVrvs6.js": {
+    "file": "assets/AppLayout-N0wVrvs6.js",
     "name": "AppLayout",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_BandTrajectoryChart-BgLd7yV5.js": {
-    "file": "assets/BandTrajectoryChart-BgLd7yV5.js",
+  "_BandTrajectoryChart-BgW586F6.js": {
+    "file": "assets/BandTrajectoryChart-BgW586F6.js",
     "name": "BandTrajectoryChart",
     "imports": [
       "resources/js/app.jsx",
-      "_with-selector-BTWBCo1m.js"
+      "_with-selector-BOlcaWOY.js"
     ]
   },
-  "_with-selector-BTWBCo1m.js": {
-    "file": "assets/with-selector-BTWBCo1m.js",
+  "_with-selector-BOlcaWOY.js": {
+    "file": "assets/with-selector-BOlcaWOY.js",
     "name": "with-selector",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-BfWYVzAk.css",
+    "file": "assets/app-CnfrWL7b.css",
     "name": "app",
     "names": [
       "app.css"
@@ -31,68 +31,68 @@
     "isEntry": true
   },
   "resources/js/Pages/Admin/Dashboard.jsx": {
-    "file": "assets/Dashboard-D6CzjEga.js",
+    "file": "assets/Dashboard-fDFfBIll.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Admin/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Admin/MicroSkills.jsx": {
-    "file": "assets/MicroSkills-Dr349dgw.js",
+    "file": "assets/MicroSkills-DeWzNtzp.js",
     "name": "MicroSkills",
     "src": "resources/js/Pages/Admin/MicroSkills.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Admin/TestShow.jsx": {
-    "file": "assets/TestShow-rlx5BqVl.js",
+    "file": "assets/TestShow-BGVG2wqx.js",
     "name": "TestShow",
     "src": "resources/js/Pages/Admin/TestShow.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Admin/Tests.jsx": {
-    "file": "assets/Tests-DRzQoh0l.js",
+    "file": "assets/Tests-BYIv3zG9.js",
     "name": "Tests",
     "src": "resources/js/Pages/Admin/Tests.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Admin/Users.jsx": {
-    "file": "assets/Users-CiJxkA_b.js",
+    "file": "assets/Users-ZXFrNykc.js",
     "name": "Users",
     "src": "resources/js/Pages/Admin/Users.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Analytics/Index.jsx": {
-    "file": "assets/Index-BJXf96Jb.js",
+    "file": "assets/Index-Cl0nRnhX.js",
     "name": "Index",
     "src": "resources/js/Pages/Analytics/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_BandTrajectoryChart-BgLd7yV5.js",
-      "_AppLayout-Cew5_y_W.js"
+      "_BandTrajectoryChart-BgW586F6.js",
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-BGpQSAWh.js",
+    "file": "assets/ForgotPassword-DZTo5QVx.js",
     "name": "ForgotPassword",
     "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
     "isDynamicEntry": true,
@@ -101,7 +101,7 @@
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-D-iiyyjQ.js",
+    "file": "assets/Login-D1UX48ea.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
@@ -110,7 +110,7 @@
     ]
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-D9SyKTQf.js",
+    "file": "assets/Register-LCs5ksRj.js",
     "name": "Register",
     "src": "resources/js/Pages/Auth/Register.jsx",
     "isDynamicEntry": true,
@@ -119,7 +119,7 @@
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-Cq39S9wk.js",
+    "file": "assets/ResetPassword-BMJsVKR0.js",
     "name": "ResetPassword",
     "src": "resources/js/Pages/Auth/ResetPassword.jsx",
     "isDynamicEntry": true,
@@ -128,7 +128,7 @@
     ]
   },
   "resources/js/Pages/Auth/VerifyEmail.jsx": {
-    "file": "assets/VerifyEmail-cMCsCg10.js",
+    "file": "assets/VerifyEmail-CcGcBS5Q.js",
     "name": "VerifyEmail",
     "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
     "isDynamicEntry": true,
@@ -137,18 +137,18 @@
     ]
   },
   "resources/js/Pages/Dashboard/Index.jsx": {
-    "file": "assets/Index-DbKfAXEY.js",
+    "file": "assets/Index-C65lzcY-.js",
     "name": "Index",
     "src": "resources/js/Pages/Dashboard/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_BandTrajectoryChart-BgLd7yV5.js",
-      "_AppLayout-Cew5_y_W.js"
+      "_BandTrajectoryChart-BgW586F6.js",
+      "_AppLayout-N0wVrvs6.js"
     ]
   },
   "resources/js/Pages/Error.jsx": {
-    "file": "assets/Error-Bl1T7Zs2.js",
+    "file": "assets/Error-CmaJ9DT0.js",
     "name": "Error",
     "src": "resources/js/Pages/Error.jsx",
     "isDynamicEntry": true,
@@ -157,27 +157,36 @@
     ]
   },
   "resources/js/Pages/Exam/Attempt.jsx": {
-    "file": "assets/Attempt-D-NOjNic.js",
+    "file": "assets/Attempt-CTNj9U7M.js",
     "name": "Attempt",
     "src": "resources/js/Pages/Exam/Attempt.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_with-selector-BTWBCo1m.js"
+      "_with-selector-BOlcaWOY.js"
     ]
   },
   "resources/js/Pages/Exam/Review.jsx": {
-    "file": "assets/Review-CEnXwdv4.js",
+    "file": "assets/Review-BhdFGHak.js",
     "name": "Review",
     "src": "resources/js/Pages/Exam/Review.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-Cew5_y_W.js"
+      "_AppLayout-N0wVrvs6.js"
+    ]
+  },
+  "resources/js/Pages/Landing.jsx": {
+    "file": "assets/Landing-Cnknj7M0.js",
+    "name": "Landing",
+    "src": "resources/js/Pages/Landing.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
     ]
   },
   "resources/js/Pages/Onboarding/Index.jsx": {
-    "file": "assets/Index--lRzmVTy.js",
+    "file": "assets/Index-BQ9t46aA.js",
     "name": "Index",
     "src": "resources/js/Pages/Onboarding/Index.jsx",
     "isDynamicEntry": true,
@@ -186,7 +195,7 @@
     ]
   },
   "resources/js/Pages/Subscription/Index.jsx": {
-    "file": "assets/Index-B0b7D8jl.js",
+    "file": "assets/Index-CZ_bwxQ1.js",
     "name": "Index",
     "src": "resources/js/Pages/Subscription/Index.jsx",
     "isDynamicEntry": true,
@@ -195,7 +204,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BQmrlYCG.js",
+    "file": "assets/app-Bm2EQebq.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -215,11 +224,12 @@
       "resources/js/Pages/Error.jsx",
       "resources/js/Pages/Exam/Attempt.jsx",
       "resources/js/Pages/Exam/Review.jsx",
+      "resources/js/Pages/Landing.jsx",
       "resources/js/Pages/Onboarding/Index.jsx",
       "resources/js/Pages/Subscription/Index.jsx"
     ],
     "css": [
-      "assets/app-BfWYVzAk.css"
+      "assets/app-CnfrWL7b.css"
     ]
   }
 }

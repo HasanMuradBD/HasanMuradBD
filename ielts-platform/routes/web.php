@@ -15,6 +15,14 @@ Route::get('/whatsapp/webhook', [\App\Http\Controllers\WhatsApp\InboundControlle
 Route::post('/whatsapp/webhook', [\App\Http\Controllers\WhatsApp\InboundController::class, 'handle'])
     ->name('whatsapp.inbound');
 
+// Public landing page — guests see it, authenticated users go straight to dashboard
+Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return inertia('Landing');
+})->name('home');
+
 // Auth views — Fortify handles the POST routes automatically
 Route::middleware('guest')->group(function () {
     // Fortify handles: GET /login, POST /login, GET /register, POST /register,
@@ -40,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Protected platform routes — require active trial or subscription
     Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
         Route::get('/tests', fn() => inertia('Exam/TestList'))->name('tests.index');
 
