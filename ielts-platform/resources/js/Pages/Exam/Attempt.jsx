@@ -15,9 +15,10 @@ export default function Attempt({ attempt, test, duration }) {
         init(attempt.id, duration);
     }, []);
 
-    // Group questions by module
+    // Group questions by module (fall back to test.module when question.module is null)
     const byModule = (test.questions ?? []).reduce((acc, q) => {
-        (acc[q.module] ??= []).push(q);
+        const mod = q.module ?? test.module;
+        (acc[mod] ??= []).push(q);
         return acc;
     }, {});
 

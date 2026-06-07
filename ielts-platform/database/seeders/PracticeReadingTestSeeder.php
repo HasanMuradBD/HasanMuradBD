@@ -208,6 +208,7 @@ PASSAGE;
             unset($qData['skills']);
 
             $question = $test->questions()->create(array_merge($qData, [
+                'module'            => 'reading',
                 'passage_reference' => self::PASSAGE,
             ]));
 
