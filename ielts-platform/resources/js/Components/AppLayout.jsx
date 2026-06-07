@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import Footer from './Footer';
 
 const NAV_LINKS = [
     { label: 'Dashboard',      routeName: 'dashboard' },
@@ -12,14 +13,14 @@ export default function AppLayout({ children }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <div className="flex items-center gap-8">
                             <Link href={route('dashboard')} className="text-xl font-bold text-indigo-600">
-                                IELTS Master
+                                IELTSLine
                             </Link>
                             {/* Desktop nav */}
                             <div className="hidden md:flex items-center gap-6">
@@ -95,7 +96,8 @@ export default function AppLayout({ children }) {
                     </div>
                 )}
             </nav>
-            <main>{children}</main>
+            <main className="flex-1">{children}</main>
+            <Footer />
         </div>
     );
 }

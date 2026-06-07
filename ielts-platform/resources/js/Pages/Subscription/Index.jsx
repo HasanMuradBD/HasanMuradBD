@@ -12,7 +12,7 @@ const features = [
 export default function SubscriptionIndex({ trialExpired, user }) {
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-indigo-800 to-blue-900 flex items-center justify-center p-4">
-            <Head title="Subscribe — IELTS Master" />
+            <Head title="Subscribe — IELTSLine" />
 
             <div className="w-full max-w-lg">
                 {trialExpired && (
@@ -25,7 +25,7 @@ export default function SubscriptionIndex({ trialExpired, user }) {
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
                     {/* Header */}
                     <div className="bg-indigo-600 px-8 py-8 text-center text-white">
-                        <p className="text-indigo-200 text-sm font-medium uppercase tracking-widest mb-2">IELTS Master Pro</p>
+                        <p className="text-indigo-200 text-sm font-medium uppercase tracking-widest mb-2">IELTSLine Pro</p>
                         <div className="flex items-end justify-center gap-1">
                             <span className="text-5xl font-bold">$10</span>
                             <span className="text-indigo-200 mb-2">/month</span>

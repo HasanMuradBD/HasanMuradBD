@@ -18,7 +18,7 @@ export default function Login({ status }) {
 
             <div className="w-full max-w-md">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white">IELTS Master</h1>
+                    <h1 className="text-3xl font-bold text-white">IELTSLine</h1>
                     <p className="text-indigo-200 mt-2">Welcome back. Let's get to work.</p>
                 </div>
 

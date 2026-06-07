@@ -45,8 +45,8 @@ export default function Error({ status }) {
                     )}
                 </div>
                 <p className="text-xs text-gray-400 mt-8">
-                    IELTS Master · Need help?{' '}
-                    <a href="mailto:support@ieltsmaster.com" className="underline">Contact support</a>
+                    IELTSLine · Need help?{' '}
+                    <a href="mailto:support@ieltsline.com" className="underline">Contact support</a>
                 </p>
             </div>
         </div>

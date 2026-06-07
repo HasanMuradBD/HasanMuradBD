@@ -4,7 +4,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 createInertiaApp({
-    title: (title) => `${title} — IELTS Master`,
+    title: (title) => `${title} — IELTSLine`,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.jsx`,

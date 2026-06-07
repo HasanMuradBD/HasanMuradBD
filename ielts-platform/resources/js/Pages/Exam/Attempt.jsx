@@ -48,12 +48,12 @@ export default function Attempt({ attempt, test, duration }) {
 
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col" style={{ userSelect: 'none' }}>
-            <Head title={`${test.title} — IELTS Master`} />
+            <Head title={`${test.title} — IELTSLine`} />
 
             {/* Exam Top Bar */}
             <header className="bg-gray-800 border-b border-gray-700 px-4 py-3 flex items-center justify-between flex-shrink-0">
                 <div className="flex items-center gap-4">
-                    <span className="text-white font-bold text-sm">IELTS Master</span>
+                    <span className="text-white font-bold text-sm">IELTSLine</span>
                     <span className="text-gray-400 text-sm">|</span>
                     <span className="text-gray-300 text-sm">{test.title}</span>
                 </div>

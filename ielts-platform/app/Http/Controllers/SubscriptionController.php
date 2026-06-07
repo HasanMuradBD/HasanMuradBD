@@ -60,7 +60,7 @@ class SubscriptionController extends Controller
         if ($user && $user->whatsapp_opted_in && $user->phone_e164) {
             \App\Jobs\SendWhatsAppMessage::dispatch(
                 $user->phone_e164,
-                "⚠️ Your IELTS Master payment failed.\n\nYou have a 3-day grace period before access is restricted.\n\nUpdate your card here: " . route('subscription.portal')
+                "⚠️ Your IELTSLine payment failed.\n\nYou have a 3-day grace period before access is restricted.\n\nUpdate your card here: " . route('subscription.portal')
             )->onQueue('whatsapp');
         }
     }
