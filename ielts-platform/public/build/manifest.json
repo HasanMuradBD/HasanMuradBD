@@ -1,28 +1,35 @@
 {
-  "_AppLayout-CRLae5iI.js": {
-    "file": "assets/AppLayout-CRLae5iI.js",
+  "_AdminLayout-CG5t6HCb.js": {
+    "file": "assets/AdminLayout-CG5t6HCb.js",
+    "name": "AdminLayout",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_AppLayout-CPLUVE79.js": {
+    "file": "assets/AppLayout-CPLUVE79.js",
     "name": "AppLayout",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_BandTrajectoryChart-De3EV8jX.js": {
-    "file": "assets/BandTrajectoryChart-De3EV8jX.js",
+  "_BandTrajectoryChart-DZbZQqhe.js": {
+    "file": "assets/BandTrajectoryChart-DZbZQqhe.js",
     "name": "BandTrajectoryChart",
     "imports": [
       "resources/js/app.jsx",
-      "_with-selector-GX9mOCDu.js"
+      "_with-selector-CQqtE-PN.js"
     ]
   },
-  "_with-selector-GX9mOCDu.js": {
-    "file": "assets/with-selector-GX9mOCDu.js",
+  "_with-selector-CQqtE-PN.js": {
+    "file": "assets/with-selector-CQqtE-PN.js",
     "name": "with-selector",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-CNjwU067.css",
+    "file": "assets/app-CUTfbCDd.css",
     "name": "app",
     "names": [
       "app.css"
@@ -30,69 +37,89 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/js/Pages/Admin/CreateTest.jsx": {
+    "file": "assets/CreateTest-TZqIiNDv.js",
+    "name": "CreateTest",
+    "src": "resources/js/Pages/Admin/CreateTest.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AdminLayout-CG5t6HCb.js"
+    ]
+  },
   "resources/js/Pages/Admin/Dashboard.jsx": {
-    "file": "assets/Dashboard-BgjrtbKP.js",
+    "file": "assets/Dashboard-BnOSAM-v.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Admin/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AdminLayout-CG5t6HCb.js"
     ]
   },
   "resources/js/Pages/Admin/MicroSkills.jsx": {
-    "file": "assets/MicroSkills-Cy65zKwu.js",
+    "file": "assets/MicroSkills-BPgrCfe6.js",
     "name": "MicroSkills",
     "src": "resources/js/Pages/Admin/MicroSkills.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AdminLayout-CG5t6HCb.js"
     ]
   },
   "resources/js/Pages/Admin/TestShow.jsx": {
-    "file": "assets/TestShow-BcVeF54o.js",
+    "file": "assets/TestShow-CO2FNaGm.js",
     "name": "TestShow",
     "src": "resources/js/Pages/Admin/TestShow.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AdminLayout-CG5t6HCb.js"
     ]
   },
   "resources/js/Pages/Admin/Tests.jsx": {
-    "file": "assets/Tests-YcwNBtnL.js",
+    "file": "assets/Tests-3TRhlrbV.js",
     "name": "Tests",
     "src": "resources/js/Pages/Admin/Tests.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AdminLayout-CG5t6HCb.js"
+    ]
+  },
+  "resources/js/Pages/Admin/TipManager.jsx": {
+    "file": "assets/TipManager-qg8QGiKm.js",
+    "name": "TipManager",
+    "src": "resources/js/Pages/Admin/TipManager.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_AdminLayout-CG5t6HCb.js"
     ]
   },
   "resources/js/Pages/Admin/Users.jsx": {
-    "file": "assets/Users-s7u_EJ7w.js",
+    "file": "assets/Users-DpQ1KgNo.js",
     "name": "Users",
     "src": "resources/js/Pages/Admin/Users.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AdminLayout-CG5t6HCb.js"
     ]
   },
   "resources/js/Pages/Analytics/Index.jsx": {
-    "file": "assets/Index-DynnsVbV.js",
+    "file": "assets/Index-kuDAC_mO.js",
     "name": "Index",
     "src": "resources/js/Pages/Analytics/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_BandTrajectoryChart-De3EV8jX.js",
-      "_AppLayout-CRLae5iI.js"
+      "_BandTrajectoryChart-DZbZQqhe.js",
+      "_AppLayout-CPLUVE79.js"
     ]
   },
   "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-Ck1NOPJo.js",
+    "file": "assets/ForgotPassword-DXnoh3IX.js",
     "name": "ForgotPassword",
     "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
     "isDynamicEntry": true,
@@ -101,7 +128,7 @@
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-iRBBbTP3.js",
+    "file": "assets/Login-DKwOXhIx.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
@@ -110,7 +137,7 @@
     ]
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-0ltwo9gX.js",
+    "file": "assets/Register-BylrIwdN.js",
     "name": "Register",
     "src": "resources/js/Pages/Auth/Register.jsx",
     "isDynamicEntry": true,
@@ -119,7 +146,7 @@
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-CcwiNYRr.js",
+    "file": "assets/ResetPassword-Ch9aFBm7.js",
     "name": "ResetPassword",
     "src": "resources/js/Pages/Auth/ResetPassword.jsx",
     "isDynamicEntry": true,
@@ -128,7 +155,7 @@
     ]
   },
   "resources/js/Pages/Auth/VerifyEmail.jsx": {
-    "file": "assets/VerifyEmail-ClYXuKre.js",
+    "file": "assets/VerifyEmail-DmqCPDRN.js",
     "name": "VerifyEmail",
     "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
     "isDynamicEntry": true,
@@ -137,18 +164,18 @@
     ]
   },
   "resources/js/Pages/Dashboard/Index.jsx": {
-    "file": "assets/Index-La-7VVzn.js",
+    "file": "assets/Index-Bqo289hR.js",
     "name": "Index",
     "src": "resources/js/Pages/Dashboard/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_BandTrajectoryChart-De3EV8jX.js",
-      "_AppLayout-CRLae5iI.js"
+      "_BandTrajectoryChart-DZbZQqhe.js",
+      "_AppLayout-CPLUVE79.js"
     ]
   },
   "resources/js/Pages/Error.jsx": {
-    "file": "assets/Error-B49Uf2gH.js",
+    "file": "assets/Error-B6VQT21I.js",
     "name": "Error",
     "src": "resources/js/Pages/Error.jsx",
     "isDynamicEntry": true,
@@ -157,27 +184,27 @@
     ]
   },
   "resources/js/Pages/Exam/Attempt.jsx": {
-    "file": "assets/Attempt-CUdrSfW-.js",
+    "file": "assets/Attempt-BWRLShLX.js",
     "name": "Attempt",
     "src": "resources/js/Pages/Exam/Attempt.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_with-selector-GX9mOCDu.js"
+      "_with-selector-CQqtE-PN.js"
     ]
   },
   "resources/js/Pages/Exam/Review.jsx": {
-    "file": "assets/Review-CpDnJSoA.js",
+    "file": "assets/Review-CWKX_PBu.js",
     "name": "Review",
     "src": "resources/js/Pages/Exam/Review.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-CRLae5iI.js"
+      "_AppLayout-CPLUVE79.js"
     ]
   },
   "resources/js/Pages/Landing.jsx": {
-    "file": "assets/Landing-DqWLurIh.js",
+    "file": "assets/Landing-ErjQ9-9H.js",
     "name": "Landing",
     "src": "resources/js/Pages/Landing.jsx",
     "isDynamicEntry": true,
@@ -186,7 +213,7 @@
     ]
   },
   "resources/js/Pages/Onboarding/Index.jsx": {
-    "file": "assets/Index-BzMGiqP1.js",
+    "file": "assets/Index-01dOFwOm.js",
     "name": "Index",
     "src": "resources/js/Pages/Onboarding/Index.jsx",
     "isDynamicEntry": true,
@@ -195,7 +222,7 @@
     ]
   },
   "resources/js/Pages/Subscription/Index.jsx": {
-    "file": "assets/Index-CvVCJM4g.js",
+    "file": "assets/Index-wuDDp3ap.js",
     "name": "Index",
     "src": "resources/js/Pages/Subscription/Index.jsx",
     "isDynamicEntry": true,
@@ -204,15 +231,17 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CFUe8l-L.js",
+    "file": "assets/app-BDFzxlUO.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/Pages/Admin/CreateTest.jsx",
       "resources/js/Pages/Admin/Dashboard.jsx",
       "resources/js/Pages/Admin/MicroSkills.jsx",
       "resources/js/Pages/Admin/TestShow.jsx",
       "resources/js/Pages/Admin/Tests.jsx",
+      "resources/js/Pages/Admin/TipManager.jsx",
       "resources/js/Pages/Admin/Users.jsx",
       "resources/js/Pages/Analytics/Index.jsx",
       "resources/js/Pages/Auth/ForgotPassword.jsx",
@@ -229,7 +258,7 @@
       "resources/js/Pages/Subscription/Index.jsx"
     ],
     "css": [
-      "assets/app-CNjwU067.css"
+      "assets/app-CUTfbCDd.css"
     ]
   }
 }

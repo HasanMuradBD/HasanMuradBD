@@ -81,4 +81,14 @@ Route::middleware(['auth', \App\Http\Middleware\RequireAdmin::class])->prefix('a
     Route::get('/questions',     [\App\Http\Controllers\Admin\AdminController::class, 'questions']) ->name('questions');
     Route::get('/micro-skills',  [\App\Http\Controllers\Admin\AdminController::class, 'microSkills'])->name('micro-skills');
     Route::get('/users',         [\App\Http\Controllers\Admin\AdminController::class, 'users'])     ->name('users');
+
+    // Content creation
+    Route::get('/content/create-test',   [\App\Http\Controllers\Admin\ContentController::class, 'createTest']) ->name('content.create-test');
+    Route::post('/content/create-test',  [\App\Http\Controllers\Admin\ContentController::class, 'storeTest'])  ->name('content.store-test');
+    Route::post('/tests/{test}/add-question', [\App\Http\Controllers\Admin\ContentController::class, 'addQuestion'])->name('tests.add-question');
+
+    // Daily tips manager
+    Route::get('/tips',          [\App\Http\Controllers\Admin\ContentController::class, 'tipsIndex']) ->name('tips.index');
+    Route::post('/tips',         [\App\Http\Controllers\Admin\ContentController::class, 'storeTip'])  ->name('tips.store');
+    Route::delete('/tips/{tip}', [\App\Http\Controllers\Admin\ContentController::class, 'deleteTip'])->name('tips.delete');
 });

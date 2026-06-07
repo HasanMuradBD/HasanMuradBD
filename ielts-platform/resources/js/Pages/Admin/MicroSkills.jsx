@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import AppLayout from '@/Components/AppLayout';
+import AdminLayout from '@/Components/AdminLayout';
 
 const MODULE_COLORS = {
     reading:   'bg-blue-100 text-blue-700',
@@ -10,7 +10,7 @@ const MODULE_COLORS = {
 
 export default function AdminMicroSkills({ skills }) {
     return (
-        <AppLayout>
+        <AdminLayout>
             <Head title="Admin — Micro-Skills" />
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
                 <div className="flex items-center justify-between">
@@ -42,6 +42,6 @@ export default function AdminMicroSkills({ skills }) {
                     ))}
                 </div>
             </div>
-        </AppLayout>
+        </AdminLayout>
     );
 }
