@@ -157,8 +157,7 @@ const FAQS = [
 export default function Landing() {
     return (
         <>
-            <Head>
-                <title>IELTSLine — Achieve Your Target Band Score</title>
+            <Head title="Achieve Your Target Band Score">
                 <meta name="description" content="IELTSLine is the #1 personalised IELTS preparation platform. AI diagnostic, adaptive study plans, full exam simulation, and a WhatsApp coach — from $10/month." />
                 <meta property="og:title" content="IELTSLine — Achieve Your Target Band Score" />
                 <meta property="og:description" content="Personalised IELTS prep with AI diagnostics, daily study plans, and real exam simulation. Start free for 15 days." />
