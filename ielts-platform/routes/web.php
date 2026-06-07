@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
             ->name('test-attempts.show');
         Route::post('/test-attempts/{attempt}/submit', [\App\Http\Controllers\TestAttemptController::class, 'submit'])
             ->name('test-attempts.submit')
-            ->middleware('throttle:3,1');  // max 3 submit attempts per minute per user
+            ->middleware('throttle:10,1');  // max 10 submit attempts per minute per user
         Route::get('/test-attempts/{attempt}/review', [\App\Http\Controllers\TestAttemptController::class, 'review'])
             ->name('test-attempts.review');
 
