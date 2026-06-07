@@ -30,6 +30,13 @@ class TestAttemptController extends Controller
             'status'        => 'in_progress',
         ]);
 
+        return redirect()->route('test-attempts.show', $attempt);
+    }
+
+    public function show(Request $request, TestAttempt $attempt)
+    {
+        abort_if($attempt->user_id !== $request->user()->id, 403);
+
         $test = $attempt->test()
             ->with(['questions' => fn($q) => $q->orderBy('sequence'), 'writingPrompts', 'speakingPrompts'])
             ->first();

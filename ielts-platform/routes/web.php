@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
         // Test attempt lifecycle
         Route::post('/test-attempts', [\App\Http\Controllers\TestAttemptController::class, 'store'])
             ->name('test-attempts.start');
+        Route::get('/test-attempts/{attempt}', [\App\Http\Controllers\TestAttemptController::class, 'show'])
+            ->name('test-attempts.show');
         Route::post('/test-attempts/{attempt}/submit', [\App\Http\Controllers\TestAttemptController::class, 'submit'])
             ->name('test-attempts.submit')
             ->middleware('throttle:3,1');  // max 3 submit attempts per minute per user
