@@ -71,7 +71,7 @@ class ContentController extends Controller
         $test->update(['total_questions' => $test->questions()->count()]);
 
         return redirect()->route('admin.tests.show', $test)
-            ->with('success', "Test "{$test->title}" created with {$test->total_questions} question(s).");
+            ->with('success', 'Test "' . $test->title . '" created with ' . $test->total_questions . ' question(s).');
     }
 
     // ── Add Question to existing test ─────────────────────────────────────────
@@ -108,7 +108,7 @@ class ContentController extends Controller
 
         $test->update(['total_questions' => $test->questions()->count()]);
 
-        return back()->with('success', "Question #{$question->sequence} added to "{$test->title}".");
+        return back()->with('success', 'Question #' . $question->sequence . ' added to "' . $test->title . '".');
     }
 
     // ── Daily Tips ────────────────────────────────────────────────────────────
@@ -142,13 +142,13 @@ class ContentController extends Controller
             'is_fallback' => (bool) ($data['is_fallback'] ?? false),
         ]);
 
-        return back()->with('success', "Tip "{$tip->title}" saved" . ($tip->target_date ? " for {$tip->target_date}." : " as evergreen fallback."));
+        return back()->with('success', 'Tip "' . $tip->title . '" saved' . ($tip->target_date ? ' for ' . $tip->target_date . '.' : ' as evergreen fallback.'));
     }
 
     public function deleteTip(DailyTip $tip): \Illuminate\Http\RedirectResponse
     {
         $title = $tip->title;
         $tip->delete();
-        return back()->with('success', "Tip "{$title}" deleted.");
+        return back()->with('success', 'Tip "' . $title . '" deleted.');
     }
 }
