@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\PracticeTestController;
 use Illuminate\Support\Facades\Route;
 
 // Stripe webhooks — no CSRF, no auth
@@ -50,14 +51,12 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware([\App\Http\Middleware\EnforceSubscription::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
-        Route::get('/tests', function () {
-            $tests = \App\Models\Test::where('is_active', true)
-                ->withCount('questions')
-                ->orderBy('module')
-                ->orderBy('type')
-                ->get(['id', 'title', 'type', 'module', 'academic_or_general', 'duration_minutes', 'total_questions']);
-            return inertia('Exam/TestList', ['tests' => $tests]);
-        })->name('tests.index');
+
+        // Practice Tests hub — module selection dashboard
+        Route::get('/practice-tests', [PracticeTestController::class, 'index'])->name('practice-tests.index');
+
+        // Legacy flat test list — kept and aliased so old links still resolve
+        Route::get('/tests', [PracticeTestController::class, 'index'])->name('tests.index');
 
         // Daily task completion
         Route::patch('/daily-tasks/{task}/complete', [\App\Http\Controllers\DailyTaskController::class, 'complete'])

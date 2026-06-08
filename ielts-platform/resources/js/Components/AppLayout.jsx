@@ -5,7 +5,7 @@ import Footer from './Footer';
 const NAV_LINKS = [
     { label: 'Dashboard',      routeName: 'dashboard' },
     { label: 'Analytics',      routeName: 'analytics.index' },
-    { label: 'Practice Tests', routeName: 'tests.index' },
+    { label: 'Practice Tests', routeName: 'practice-tests.index' },
 ];
 
 export default function AppLayout({ children }) {
