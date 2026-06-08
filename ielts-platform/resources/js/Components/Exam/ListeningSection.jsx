@@ -4,8 +4,7 @@ import { useExamStore } from '@/store/examStore';
 /* ──────────────────────────────────────────────────────────────────────────
    STICKY TOP AUDIO PLAYER
    - Plays exactly ONCE (MAX_PLAYS = 1)
-   - No scrub bar interaction: progress bar is display-only, never seekable
-   - No pause control exposed once playing — matches real IELTS conditions
+   - Progress bar is display-only (never seekable); no pause exposed
    ────────────────────────────────────────────────────────────────────────── */
 function StickyAudioPlayer({ audioUrl }) {
     const audioRef = useRef(null);
@@ -46,8 +45,6 @@ function StickyAudioPlayer({ audioUrl }) {
     return (
         <div className="bg-gray-800 border-b border-gray-700 px-5 py-3 flex items-center gap-4">
             {audioUrl && <audio ref={audioRef} src={audioUrl} preload="metadata" />}
-
-            {/* Play button */}
             <button
                 onClick={play}
                 disabled={!canPlay}
@@ -57,23 +54,16 @@ function StickyAudioPlayer({ audioUrl }) {
                     ? <><span className="w-2 h-2 bg-white rounded-full animate-pulse" /> Playing</>
                     : phase === 'ended' ? '✓ Complete' : '▶ Play Audio'}
             </button>
-
-            {/* Display-only progress bar (NOT seekable) */}
             <div className="flex-1">
                 <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                    <div
-                        className="bg-indigo-500 h-2 rounded-full transition-all duration-700"
-                        style={{ width: `${pct}%` }}
-                    />
+                    <div className="bg-indigo-500 h-2 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
                     <span>{fmt(currentTime)}</span>
                     <span className={plays >= MAX_PLAYS ? 'text-red-400' : 'text-amber-400'}>
-                        {!audioUrl
-                            ? 'No audio attached'
-                            : plays >= MAX_PLAYS
-                                ? '⛔ Plays once only — used'
-                                : '⚠ This audio plays once only'}
+                        {!audioUrl ? 'No audio attached'
+                            : plays >= MAX_PLAYS ? '⛔ Plays once only — used'
+                            : '⚠ This audio plays once only'}
                     </span>
                     <span>{duration ? fmt(duration) : '--:--'}</span>
                 </div>
@@ -82,170 +72,154 @@ function StickyAudioPlayer({ audioUrl }) {
     );
 }
 
-/* ──────────────────────────────────────────────────────────────────────────
-   INLINE BLANK RENDERER
-   Splits question_text on a blank marker and drops an inline input where the
-   blank is. Markers accepted: "[____]", "____" (4+ underscores), or "{answer}".
-   If no marker is found, the input renders after the prompt text.
-   ────────────────────────────────────────────────────────────────────────── */
+/* ── Render-category classification ──────────────────────────────────────── */
+const DROPDOWN_TYPES = ['matching_headings', 'matching_information', 'matching_features', 'map_labelling', 'diagram_labelling'];
+
+function categoryOf(type) {
+    if (type === 'multiple_choice') return 'mc';
+    if (DROPDOWN_TYPES.includes(type)) return 'matching';
+    return 'completion'; // form / note / sentence / summary / short_answer
+}
+
+const INSTRUCTIONS = {
+    completion: 'Complete the notes below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.',
+    mc:         'Choose the correct letter, A, B or C.',
+    matching:   'Choose your answer from the dropdown for each item.',
+};
+
 const BLANK_RE = /\[_+\]|_{4,}|\{answer\}/i;
 
-function InlineCompletion({ question, value, onChange }) {
-    const text = question.question_text ?? '';
-    const hasBlank = BLANK_RE.test(text);
+/* ── Field-level inputs (no card wrappers) ───────────────────────────────── */
 
-    const InputBox = (
+function blankInput(value, onChange) {
+    return (
         <input
             type="text"
             value={value}
             onChange={e => onChange(e.target.value)}
-            placeholder="answer"
-            className="inline-block align-baseline mx-1 min-w-[8rem] bg-gray-700/80 border-b-2 border-indigo-400 text-white text-sm rounded-t px-2 py-0.5 focus:bg-gray-700 outline-none placeholder-gray-600"
+            className="inline-block align-baseline mx-1 w-40 bg-gray-800 border-b-2 border-indigo-400/70 text-white text-sm px-2 py-0.5 rounded-t focus:border-indigo-400 focus:bg-gray-700 outline-none"
         />
     );
+}
 
-    if (!hasBlank) {
-        return (
-            <span className="text-gray-200 text-sm leading-relaxed">
-                {text} {InputBox}
-            </span>
-        );
+/* One completion row: "<num>  Label: [input] (hint)" rendered inline. */
+function CompletionRow({ question }) {
+    const { answers, setAnswer } = useExamStore();
+    const value = answers[question.id] ?? '';
+    const onChange = v => setAnswer(question.id, v);
+    const text = question.question_text ?? '';
+
+    let body;
+    if (BLANK_RE.test(text)) {
+        const [before, after] = text.split(BLANK_RE);
+        body = <>{before}{blankInput(value, onChange)}{after}</>;
+    } else {
+        body = <>{text} {blankInput(value, onChange)}</>;
     }
 
-    const [before, after] = text.split(BLANK_RE);
     return (
-        <span className="text-gray-200 text-sm leading-relaxed">
-            {before}{InputBox}{after}
-        </span>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────────────────
-   MATCHING / LABELLING DROPDOWN
-   Uses question.options. Each option may be a string or {value,label}.
-   ────────────────────────────────────────────────────────────────────────── */
-function MatchingSelect({ question, value, onChange }) {
-    const opts = (question.options ?? []).map(o =>
-        typeof o === 'string' ? { value: o, label: o } : o
-    );
-    return (
-        <select
-            value={value}
-            onChange={e => onChange(e.target.value)}
-            className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg px-3 py-2 focus:border-indigo-400 outline-none min-w-[12rem]"
-        >
-            <option value="">— Select —</option>
-            {opts.map((o, i) => (
-                <option key={i} value={o.value}>{o.label}</option>
-            ))}
-        </select>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────────────────
-   MULTIPLE CHOICE
-   Uses question.options for the choice text; falls back to bare A–D letters.
-   ────────────────────────────────────────────────────────────────────────── */
-function MultipleChoice({ question, value, onChange }) {
-    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-    const raw = question.options ?? [];
-
-    // Build [{value, label}] — pair each option with a letter for the answer key.
-    const choices = raw.length
-        ? raw.map((o, i) => typeof o === 'string'
-            ? { value: letters[i], label: o }
-            : { value: o.value ?? letters[i], label: o.label ?? o.value })
-        : letters.slice(0, 4).map(l => ({ value: l, label: l }));
-
-    return (
-        <div className="space-y-2">
-            {choices.map(c => {
-                const selected = value === c.value;
-                return (
-                    <button
-                        key={c.value}
-                        onClick={() => onChange(c.value)}
-                        className={`w-full flex items-center gap-3 text-left text-sm rounded-lg border px-3 py-2.5 transition ${
-                            selected
-                                ? 'bg-indigo-600 border-indigo-400 text-white'
-                                : 'border-gray-600 text-gray-300 hover:border-indigo-400 hover:text-indigo-200'
-                        }`}
-                    >
-                        <span className={`w-6 h-6 flex-shrink-0 rounded-full flex items-center justify-center text-xs font-bold ${
-                            selected ? 'bg-white text-indigo-700' : 'bg-gray-700 text-gray-400'
-                        }`}>
-                            {c.value}
-                        </span>
-                        {c.label}
-                    </button>
-                );
-            })}
+        <div className="flex items-baseline gap-3 py-1.5">
+            <span className="flex-shrink-0 w-6 text-right text-sm font-semibold text-indigo-400">{question.sequence}</span>
+            <span className="text-gray-200 text-[0.95rem] leading-relaxed">{body}</span>
         </div>
     );
 }
 
-/* ── Single question row ─────────────────────────────────────────────────── */
-const DROPDOWN_TYPES = ['matching_headings', 'matching_information', 'matching_features', 'map_labelling', 'diagram_labelling'];
-
-function ListeningQuestion({ question }) {
-    const { answers, setAnswer, flagged, toggleFlag } = useExamStore();
-    const answer = answers[question.id] ?? '';
-    const isFl   = flagged.has(question.id);
-    const done   = String(answer).trim().length > 0;
-
-    const isMC       = question.question_type === 'multiple_choice';
-    const isDropdown = DROPDOWN_TYPES.includes(question.question_type);
-
-    const onChange = v => setAnswer(question.id, v);
+/* Compact multiple choice: prompt then inline A/B/C radio chips. */
+function McRow({ question }) {
+    const { answers, setAnswer } = useExamStore();
+    const value = answers[question.id] ?? '';
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const raw = question.options ?? [];
+    const choices = raw.length
+        ? raw.map((o, i) => typeof o === 'string' ? { value: letters[i], label: o } : { value: o.value ?? letters[i], label: o.label ?? o.value })
+        : letters.slice(0, 3).map(l => ({ value: l, label: '' }));
 
     return (
-        <div
-            id={`lq-${question.id}`}
-            className={`p-4 rounded-xl border mb-3 transition ${
-                isFl ? 'border-amber-500/60 bg-amber-950/20'
-                     : done ? 'border-green-700/40 bg-green-950/10'
-                            : 'border-gray-700 bg-gray-800/50'
-            }`}
-        >
-            <div className="flex items-start gap-3">
-                <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5 ${
-                    done ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-400'
-                }`}>
-                    {question.sequence}
-                </span>
-
-                <div className="flex-1">
-                    {isMC ? (
-                        <>
-                            <p className="text-gray-200 text-sm leading-relaxed mb-3">{question.question_text}</p>
-                            <MultipleChoice question={question} value={answer} onChange={onChange} />
-                        </>
-                    ) : isDropdown ? (
-                        <div className="flex items-center gap-3 flex-wrap">
-                            <p className="text-gray-200 text-sm leading-relaxed flex-1 min-w-[10rem]">{question.question_text}</p>
-                            <MatchingSelect question={question} value={answer} onChange={onChange} />
-                        </div>
-                    ) : (
-                        // form / note / sentence / summary / short-answer completion
-                        <InlineCompletion question={question} value={answer} onChange={onChange} />
-                    )}
+        <div className="flex items-baseline gap-3 py-2.5">
+            <span className="flex-shrink-0 w-6 text-right text-sm font-semibold text-indigo-400">{question.sequence}</span>
+            <div className="flex-1">
+                <p className="text-gray-200 text-[0.95rem] leading-relaxed mb-1.5">{question.question_text}</p>
+                <div className="flex flex-col gap-1">
+                    {choices.map(c => {
+                        const sel = value === c.value;
+                        return (
+                            <button
+                                key={c.value}
+                                onClick={() => setAnswer(question.id, c.value)}
+                                className="flex items-center gap-2.5 text-left text-sm group"
+                            >
+                                <span className={`flex-shrink-0 w-5 h-5 rounded-full border flex items-center justify-center text-[0.7rem] font-bold transition ${
+                                    sel ? 'bg-indigo-500 border-indigo-400 text-white' : 'border-gray-500 text-gray-400 group-hover:border-indigo-400'
+                                }`}>
+                                    {c.value}
+                                </span>
+                                <span className={sel ? 'text-white' : 'text-gray-300 group-hover:text-white'}>{c.label}</span>
+                            </button>
+                        );
+                    })}
                 </div>
-
-                <button
-                    onClick={() => toggleFlag(question.id)}
-                    className={`flex-shrink-0 text-xs px-2 py-1 rounded border transition ${
-                        isFl ? 'border-amber-500 text-amber-400'
-                             : 'border-gray-600 text-gray-500 hover:border-amber-500 hover:text-amber-400'
-                    }`}
-                >
-                    {isFl ? '⚑' : '⚐'}
-                </button>
             </div>
         </div>
     );
 }
 
-/* ── Listening section layout ────────────────────────────────────────────── */
+/* Compact matching row: "<num>  item .......... [select]" */
+function MatchingRow({ question }) {
+    const { answers, setAnswer } = useExamStore();
+    const value = answers[question.id] ?? '';
+    const opts = (question.options ?? []).map(o => typeof o === 'string' ? { value: o, label: o } : o);
+
+    return (
+        <div className="flex items-center gap-3 py-1.5">
+            <span className="flex-shrink-0 w-6 text-right text-sm font-semibold text-indigo-400">{question.sequence}</span>
+            <span className="text-gray-200 text-[0.95rem] flex-1 min-w-0 truncate">{question.question_text}</span>
+            <select
+                value={value}
+                onChange={e => setAnswer(question.id, e.target.value)}
+                className="flex-shrink-0 bg-gray-800 border border-gray-600 text-white text-sm rounded-md px-2.5 py-1.5 focus:border-indigo-400 outline-none"
+            >
+                <option value="">— Select —</option>
+                {opts.map((o, i) => <option key={i} value={o.value}>{o.label}</option>)}
+            </select>
+        </div>
+    );
+}
+
+/* ── One instruction group (consecutive questions of the same category) ──── */
+function QuestionGroup({ category, questions }) {
+    const first = questions[0].sequence;
+    const last  = questions[questions.length - 1].sequence;
+    const range = first === last ? `Question ${first}` : `Questions ${first}–${last}`;
+
+    const Row = category === 'mc' ? McRow : category === 'matching' ? MatchingRow : CompletionRow;
+
+    return (
+        <div className="mb-7">
+            <div className="mb-2">
+                <p className="text-sm font-bold text-white">{range}</p>
+                <p className="text-xs text-gray-400 italic">{INSTRUCTIONS[category]}</p>
+            </div>
+            <div className={category === 'completion' ? 'border-l-2 border-gray-700 pl-3' : ''}>
+                {questions.map(q => <Row key={q.id} question={q} />)}
+            </div>
+        </div>
+    );
+}
+
+/* Split a section's questions into consecutive same-category groups. */
+function groupBySection(questions) {
+    const groups = [];
+    for (const q of questions) {
+        const cat = categoryOf(q.question_type);
+        const tail = groups[groups.length - 1];
+        if (tail && tail.category === cat) tail.questions.push(q);
+        else groups.push({ category: cat, questions: [q] });
+    }
+    return groups;
+}
+
+/* ── Section layout ──────────────────────────────────────────────────────── */
 export default function ListeningSection({ questions, test }) {
     const audioUrl = test.audio_file_path ?? test.audio_url ?? null;
 
@@ -256,27 +230,25 @@ export default function ListeningSection({ questions, test }) {
     }, {});
 
     return (
-        <div className="h-full flex flex-col overflow-hidden">
-            {/* STICKY TOP: audio player */}
+        <div className="h-full flex flex-col overflow-hidden bg-gray-900">
             <div className="sticky top-0 z-10 flex-shrink-0">
                 <StickyAudioPlayer audioUrl={audioUrl} />
             </div>
 
-            {/* Scrollable question sheet */}
             <div className="flex-1 overflow-y-auto">
-                <div className="max-w-3xl mx-auto px-5 py-6">
-                    {Object.entries(sections).map(([sec, qs]) => (
-                        <div key={sec} className="mb-8">
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xs text-indigo-400 uppercase tracking-widest font-bold">Section {sec}</span>
-                                <span className="text-xs text-gray-500">
+                {/* Continuous exam sheet */}
+                <div className="max-w-3xl mx-auto my-6 bg-gray-800/40 rounded-xl border border-gray-700/60 px-8 py-7">
+                    {Object.entries(sections).map(([sec, qs], idx) => (
+                        <div key={sec} className={idx > 0 ? 'mt-8 pt-8 border-t border-gray-700/60' : ''}>
+                            <h2 className="text-indigo-300 font-bold tracking-wide mb-5">
+                                Section {sec}
+                                <span className="text-gray-500 font-normal text-sm ml-2">
                                     · Questions {qs[0].sequence}–{qs[qs.length - 1].sequence}
                                 </span>
-                            </div>
-                            <p className="text-xs text-gray-500 mb-3">
-                                Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.
-                            </p>
-                            {qs.map(q => <ListeningQuestion key={q.id} question={q} />)}
+                            </h2>
+                            {groupBySection(qs).map((g, i) => (
+                                <QuestionGroup key={i} category={g.category} questions={g.questions} />
+                            ))}
                         </div>
                     ))}
 
