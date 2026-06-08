@@ -80,7 +80,9 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin panel — requires auth + ADMIN_EMAILS env var
 Route::middleware(['auth', \App\Http\Middleware\RequireAdmin::class])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/',              [\App\Http\Controllers\Admin\AdminController::class, 'dashboard']) ->name('dashboard');
+    // Dashboard reachable at BOTH /admin and /admin/dashboard
+    Route::get('/',              [\App\Http\Controllers\Admin\AdminController::class, 'dashboard']) ->name('home');
+    Route::get('/dashboard',     [\App\Http\Controllers\Admin\AdminController::class, 'dashboard']) ->name('dashboard');
     Route::get('/tests',         [\App\Http\Controllers\Admin\AdminController::class, 'tests'])     ->name('tests');
     Route::get('/tests/{test}',  [\App\Http\Controllers\Admin\AdminController::class, 'testShow'])  ->name('tests.show');
     Route::post('/tests/{test}/toggle', [\App\Http\Controllers\Admin\AdminController::class, 'toggleTest'])->name('tests.toggle');
