@@ -74,7 +74,7 @@ class TestAttemptController extends Controller
             $question = $questions->get($questionId);
             if (!$question) continue;
 
-            $isCorrect = strtolower(trim($answer)) === strtolower(trim($question->correct_answer));
+            $isCorrect = $this->matchesAnswerKey($answer, $question->correct_answer);
 
             $responses[] = [
                 'test_attempt_id'    => $attempt->id,
@@ -118,6 +118,38 @@ class TestAttemptController extends Controller
         }
 
         return redirect()->route('test-attempts.review', $attempt);
+    }
+
+    /**
+     * IELTS-style answer matching. Case-insensitive, punctuation-tolerant,
+     * and supports multiple accepted answers separated by "/" or "|"
+     * (e.g. "twenty/20" or "color|colour").
+     */
+    private function matchesAnswerKey(?string $given, ?string $key): bool
+    {
+        if ($given === null || $key === null) {
+            return false;
+        }
+
+        $normalize = static function (string $v): string {
+            $v = mb_strtolower(trim($v));
+            $v = preg_replace('/[.,;:!?"\']/u', '', $v);   // strip punctuation
+            $v = preg_replace('/\s+/u', ' ', $v);          // collapse whitespace
+            return trim($v);
+        };
+
+        $givenNorm = $normalize($given);
+        if ($givenNorm === '') {
+            return false;
+        }
+
+        foreach (preg_split('/[\/|]/', $key) as $accepted) {
+            if ($normalize($accepted) === $givenNorm) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function review(Request $request, TestAttempt $attempt)
