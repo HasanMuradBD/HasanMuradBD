@@ -21,9 +21,11 @@ export default function ExamTimer({ attemptId }) {
     useEffect(() => {
         if (timeRemaining === 0 && !useExamStore.getState().submitted) {
             markSubmitted();
+            const s = useExamStore.getState();
             router.post(route('test-attempts.submit', attemptId), {
-                answers: useExamStore.getState().answers,
-                timed_out: true,
+                answers:       s.answers,
+                writing_texts: s.writingTexts,
+                timed_out:     true,
             });
         }
     }, [timeRemaining]);

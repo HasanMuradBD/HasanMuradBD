@@ -1,25 +1,31 @@
 import { create } from 'zustand';
 
-export const useExamStore = create((set, get) => ({
-    attemptId: null,
-    answers: {},          // { [questionId]: userAnswer }
-    flagged: new Set(),   // questionIds flagged for review
-    timeRemaining: 0,     // seconds
-    timerActive: false,
+export const useExamStore = create((set) => ({
+    attemptId:      null,
+    answers:        {},       // { [questionId]: string } — Reading / Listening
+    writingTexts:   {},       // { [taskKey]: string }    — Writing tasks
+    flagged:        new Set(),
+    timeRemaining:  0,
+    timerActive:    false,
     currentSection: 1,
-    submitted: false,
+    submitted:      false,
 
     init: (attemptId, durationSeconds) => set({
         attemptId,
-        timeRemaining: durationSeconds,
-        timerActive: true,
-        answers: {},
-        flagged: new Set(),
-        submitted: false,
+        timeRemaining:  durationSeconds,
+        timerActive:    true,
+        answers:        {},
+        writingTexts:   {},
+        flagged:        new Set(),
+        submitted:      false,
+        currentSection: 1,
     }),
 
     setAnswer: (questionId, value) =>
         set(state => ({ answers: { ...state.answers, [questionId]: value } })),
+
+    setWritingText: (taskKey, text) =>
+        set(state => ({ writingTexts: { ...state.writingTexts, [taskKey]: text } })),
 
     toggleFlag: (questionId) =>
         set(state => {
@@ -34,7 +40,6 @@ export const useExamStore = create((set, get) => ({
             return { timeRemaining: state.timeRemaining - 1 };
         }),
 
-    setSection: (n) => set({ currentSection: n }),
-
-    markSubmitted: () => set({ submitted: true, timerActive: false }),
+    setSection:    (n) => set({ currentSection: n }),
+    markSubmitted: ()  => set({ submitted: true, timerActive: false }),
 }));

@@ -61,16 +61,16 @@ class TestAttemptController extends Controller
         }
 
         $data = $request->validate([
-            'answers'    => 'required|array',
-            'timings'    => 'nullable|array',
-            'timed_out'  => 'nullable|boolean',
+            'answers'       => 'nullable|array',
+            'writing_texts' => 'nullable|array',
+            'timings'       => 'nullable|array',
+            'timed_out'     => 'nullable|boolean',
         ]);
 
-        // Eager-load questions once to avoid N+1 inside the loop
         $questions = $attempt->test->questions()->get()->keyBy('id');
 
         $responses = [];
-        foreach ($data['answers'] as $questionId => $answer) {
+        foreach (($data['answers'] ?? []) as $questionId => $answer) {
             $question = $questions->get($questionId);
             if (!$question) continue;
 
@@ -98,6 +98,7 @@ class TestAttemptController extends Controller
             'status'             => $status,
             'submitted_at'       => now(),
             'time_taken_seconds' => now()->diffInSeconds($attempt->started_at),
+            'writing_texts'      => !empty($data['writing_texts']) ? $data['writing_texts'] : null,
         ]);
 
         // Calculate and store bands

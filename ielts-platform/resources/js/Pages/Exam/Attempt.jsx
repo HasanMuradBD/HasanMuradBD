@@ -32,13 +32,14 @@ export default function Attempt({ attempt, test, duration }) {
     const activeModule = modules[currentSection - 1] ?? modules[0];
     const questions = byModule[activeModule] ?? [];
 
-    const handleSubmit = () => {
+    const handleSubmit = (timedOut = false) => {
         if (submitInProgress.current || submitted) return;
         submitInProgress.current = true;
-
+        const s = useExamStore.getState();
         router.post(route('test-attempts.submit', attempt.id), {
-            answers: Object.fromEntries(Object.entries(useExamStore.getState().answers)),
-            timed_out: false,
+            answers:       s.answers,
+            writing_texts: s.writingTexts,
+            timed_out:     timedOut,
         });
     };
 
